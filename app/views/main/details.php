@@ -1,25 +1,28 @@
 <!DOCTYPE html>
-
 <html>
 <head>
-
-
-    <title> Planet details</title>
+    <title>Zoo Planet</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!-- Bootstrap -->
     <link href="<?php echo URLROOT . "/public/mh/css/bootstrap.css" ?>" rel="stylesheet"/>
 
     <!--Google Fonts-->
-    <link
-            href="http://fonts.googleapis.com/css?family=Duru+Sans|Actor"
-            rel="stylesheet"
-            type="text/css"
-    />
+    <link href="http://fonts.googleapis.com/css?family=Duru+Sans|Actor" rel="stylesheet" type="text/css"/>
 
     <!--Bootshape-->
     <link href="<?php echo URLROOT . "/public/mh/css/details.css" ?>" rel="stylesheet"/>
     <link href="<?php echo URLROOT . "/public/mh/css/bootshape.css" ?>" rel="stylesheet"/>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 
+  <script type="text/javascript" src="<?php echo URLROOT . "/public/mh/js/bootstrap.min.js" ?>"></script>
+  <script type="text/javascript" src="<?php echo URLROOT . "/public/mh/js/bootshape.js" ?>"></script>
+  <script type="text/javascript" src="<?php echo URLROOT . "/public/mh/js/jquery.js" ?>"></script>
+
+    <![endif]-->
 </head>
 <body>
 <!-- Navigation bar -->
@@ -48,10 +51,9 @@
     </div>
 </div>
 
-<!-- End Navigation bar -->
-<!------ Include the above in your HEAD tag ---------->
-
-
+<?php
+$currentPlant = $data;
+$imgs = json_decode($currentPlant->imgs); ?>
 <div class="container">
     <div class="card">
         <div class="container-fliud">
@@ -59,35 +61,30 @@
                 <div class="preview col-md-6">
 
                     <div class="preview-pic tab-content">
-                        <div class="tab-pane active" id="pic-1"><img src="./img/252.jpg"/></div>
+                        <div class="tab-pane active" id="pic-1"><img
+                                    src="<?php echo  checkImg($currentPlant->mainImg)  ?>"/></div>
 
                     </div>
                     <ul class="preview-thumbnail nav nav-tabs">
-                        <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="./img/200.jpg"/></a></li>
-                        <li><a data-target="#pic-2" data-toggle="tab"><img src=<?php echo URLROOT . "/public/mh/img/200.jpg"?>""/></a></li>
-                        <li><a data-target="#pic-3" data-toggle="tab"><img src="./img/201.jpg"/></a></li>
-                        <li><a data-target="#pic-4" data-toggle="tab"><img src="./img/202.jpg"/></a></li>
-                        <li><a data-target="#pic-5" data-toggle="tab"><img src="./img/201.jpg"/></a></li>
+                        <?php
+                        $i = 0;
+                        foreach ($imgs as $img) :?>
+                            <li><a data-target="#pic-<?php echo $i ?>" data-toggle="tab"><img
+                                            src=" <?php echo checkImg($img)  ?>"/></a></li>
+                        <?php endforeach; ?>
                     </ul>
 
                 </div>
                 <div class="details col-md-6">
-                    <h3 class="product-title">وردة الياسمين</h3>
-                    <h3 class="product-title">Jasminum polyanthum</h3>
+                    <h3 class="product-title"><?php echo $currentPlant->name; ?> </h3>
+                    <h3 class="product-title"> <?php echo $currentPlant->eName; ?></h3>
 
                     <p class="product-description text-end">
-                        زهرة الياسمين هي إحدى أنواع
-                        الشُجيرات المزهرة التي تنتمي للفصيلة الزيتونية وتنتشر في مُعظم
-                        أنحاء العالم بسبب جمال زهرتِها التي تأتي غالباً باللون الأبيض أو
-                        الأصفر ورائحتها الفوّاحة، وعادةً ما يتراوح طول نبتة الياسمين بين 3
-                        و4.5 متر إذ تُضفي منظراً جميلاً على المكان، في حين يوجد نوعين من
-                        الياسمين يُمكن استخدامهما في إنتاج النفط، وتُعتبر زهرة الياسمين
-                        الزهرة الوطنية لكل من إندونيسيا والفلبين، كما يُعتقد أن أصل هذه
-                        الزهرة يعود إلى غرب الصين.
+                        <?php echo $currentPlant->det; ?>
                     </p>
                     <div class="type">
                         <h4><b> : النوع </b></h4>
-                        <span class="badge bg-blue">طبية</span>
+                        <span class="badge bg-blue"><?php echo $currentPlant->type; ?></span>
                     </div>
 
                 </div>
@@ -107,47 +104,5 @@
         Planets. All Rights Reserved.
     </p>
 </div>
-
-<!-- End Footer -->
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<!-- // <script src="https://code.jquery.com/jquery.js"></script> -->
-<script src="js/jquery.js"></script>
-<script>
-    let items = document.getElementById('garden')
-    let planet = ''
-    for (let index = 0; index < 6; index++) {
-        planet += `
-    <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-          <img src="img/pic22.jpg" alt="" class="img-circle" />
-          <div class="caption">
-            <h3 class="text-center">وردة الياسمين</h3>
-            <p>
-              زهرة الياسمين (بالإنجليزية: Jasminum polyanthum) هي إحدى أنواع
-              الشُجيرات المزهرة التي تنتمي للفصيلة الزيتونية وتنتشر في مُعظم
-              أنحاء العالم بسبب جمال زهرتِها التي تأتي غالباً باللون الأبيض أو
-              الأصفر ورائحتها الفوّاحة، وعادةً ما يتراوح طول نبتة الياسمين بين 3
-              و4.5 متر إذ تُضفي منظراً جميلاً على المكان، في حين يوجد نوعين من
-              الياسمين يُمكن استخدامهما في إنتاج النفط، وتُعتبر زهرة الياسمين
-              الزهرة الوطنية لكل من إندونيسيا والفلبين، كما يُعتقد أن أصل هذه
-              الزهرة يعود إلى غرب الصين.
-            </p>
-            <div class="btn-toolbar text-center">
-              <a href="details.html" role="button" class="btn btn-info"
-                >Details</a
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-    `
-
-    }
-    items.innerHTML = planet
-</script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"></script>
-<script src="js/bootshape.js"></script>
 </body>
 </html>

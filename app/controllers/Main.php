@@ -28,11 +28,12 @@ class Main extends Controller
 
 
 
-    public function details()
+    public function details($pId = 0)
     {
-        $Plants = $this->plantModel->getPlants();
-        $data = ['Plants' => $Plants,];
-        $this->view('main/details', []);
+
+        $Plants = $this->plantModel->getPlantById($pId);
+        $data =  $Plants;
+        $this->view('main/details',$data);
     }
 
 }

@@ -24,3 +24,31 @@ function flash($name = '', $message = '', $class = 'alert alert-success'){
     }
   }
 }
+
+function checkImg($source, $noImgName = "noImage.png")
+{
+
+    clearstatcache();
+    $imageSource = URLROOT . "/public/images/statics/" . $noImgName;
+    $upOne = realpath(dirname(__FILE__) . '/../..');
+    $target = $upOne . "\public\images\\";
+    //print_r($target);
+//    print_r( URLROOT . "/public/images/" . $source);
+    //print_r($target.$source);
+    if (isset($source) && !empty($source)) {
+        if (file_exists($target . $source)) {
+
+            $imageSource = URLROOT . "/public/images/" . $source;
+        }
+        else
+        {
+            $imageSource = URLROOT . "/public/images/statics/" . $noImgName;
+        }
+    }
+    else
+    {
+        $imageSource = URLROOT . "/public/images/statics/" . $noImgName;
+    }
+
+    echo $imageSource;
+}
