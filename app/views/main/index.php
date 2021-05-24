@@ -120,8 +120,7 @@
 
                 if (isset($plant->mainImg) && !empty($plant->mainImg)):
                     if (file_exists($target . $plant->mainImg)) :
-                        $imageSource = URLROOT . "/public/images/" . $plant->mainImg;
-                        ?>
+                        $imageSource = URLROOT . "/public/images/" . $plant->mainImg;?>
                         <br>
                         <a target="_blank"
                            href="<?php echo $imageSource ?>">
@@ -138,7 +137,7 @@
                         <?php  echo $plant->det; ?>
                     </p>
                     <div class="btn-toolbar text-center">
-                        <a href="details.html" role="button" class="btn text-white btns">Details</a>
+                        <a href="<?php echo URLROOT . "/plants/details"?>" role="button" class="btn text-white btns">Details</a>
                     </div>
                 </div>
             </div>
@@ -146,28 +145,12 @@
     <?php endforeach; ?>
 
 </div>
-<!-- End Thumbnails -->
-<!-- Footer -->
-<!-- contact form -->
-
-<!-- copyright -->
 <div class="footer text-center">
     <p>
-        &copy; 2021
+        &copy;2021
         <b><a class="blue" target="_blank" href="https://alkafeel.edu.iq/">
                 Alkafeel University</a></b>Planets. All Rights Reserved.
     </p>
 </div>
-
-<!-- End Footer -->
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<!-- // <script src="https://code.jquery.com/jquery.js"></script> -->
-
-<script>
-
-</script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-
 </body>
 </html>

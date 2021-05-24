@@ -27,4 +27,12 @@ class Main extends Controller
     }
 
 
+
+    public function details()
+    {
+        $Plants = $this->plantModel->getPlants();
+        $data = ['Plants' => $Plants,];
+        $this->view('main/details', []);
+    }
+
 }
