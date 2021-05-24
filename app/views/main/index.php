@@ -5,16 +5,12 @@
     <title>Zoo Planet</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!-- Bootstrap -->
-    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <link href="<?php echo URLROOT . "/public/mh/css/bootstrap.css"?>" rel="stylesheet"/>
 
     <!--Google Fonts-->
-    <link
-            href="http://fonts.googleapis.com/css?family=Duru+Sans|Actor"
-            rel="stylesheet"
-            type="text/css"/>
+    <link href="http://fonts.googleapis.com/css?family=Duru+Sans|Actor" rel="stylesheet" type="text/css"/>
 
     <!--Bootshape-->
-
     <link href="<?php echo URLROOT . "/public/mh/css/bootshape.css" ?>" rel="stylesheet"/>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,12 +39,10 @@
             <ul class="navbar-nav nav">
                 <li>
 
-                    <a style="padding: 0;" target="_blank" href="https://alkafeel.edu.iq/"
-                    ><img
+                    <a style="padding: 0;" target="_blank" href="https://alkafeel.edu.iq/"><img
                                 style="width: 18rem;"
                                 src="https://alkafeel.edu.iq/tables/public/images/statics/logo.png"
-                                alt="logo "
-                        /></a>
+                                alt="logo"/></a>
                 </li>
             </ul>
         </nav>
@@ -65,11 +59,9 @@
             data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
-            <li
-                    data-target="#carousel-example-generic"
+            <li data-target="#carousel-example-generic"
                     data-slide-to="0"
-                    class="active"
-            ></li>
+                    class="active"></li>
             <li data-target="#carousel-example-generic" data-slide-to="1"></li>
             <li data-target="#carousel-example-generic" data-slide-to="2"></li>
         </ol>
@@ -89,14 +81,12 @@
             </div>
         </div>
         <!-- Controls -->
-        <a
-                class="left carousel-control"
+        <a class="left carousel-control"
                 href="#carousel-example-generic"
                 data-slide="prev">
             <span class="glyphicon glyphicon-chevron-left"></span>
         </a>
-        <a
-                class="right carousel-control"
+        <a class="right carousel-control"
                 href="#carousel-example-generic"
                 data-slide="next">
             <span class="glyphicon glyphicon-chevron-right"></span>
