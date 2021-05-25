@@ -68,37 +68,22 @@ class Plant
         $this->db->bind(':type', $data['type']);
 
 
-        $x = 0;
         //Execute
         if ($this->db->execute()) {
-
             $upOne = realpath(dirname(__FILE__) . '/../..');
             $target = $upOne . "/public/images/";
-            for ($i = 0; $i <= count($this->tempImgName); $i++) {
-
+            for ($i = 0; $i < count($this->tempImgName); $i++) {
                 $finalPathName = $target . $newNames[$i];
-
                 // Writes the photo to the server
                 if ($this->tempImgName != "") {
-                    if (move_uploaded_file($this->tempImgName[$i], $finalPathName)) {
-//                        return true;
-                        return ($x == count($this->tempImgName) ? true : false);
-
-
-                        // Tells you if its all ok
-                        // echo "The file " . basename($this->imgName) . " has been uploaded, and your information has been added to the directory";
-                    } else {
-//                        return false;
-                        // Gives and error if its not
-                        //  echo "Sorry, there was a problem uploading your file.";
-                    }
+                    move_uploaded_file($this->tempImgName[$i], $finalPathName);
+//                    return true;
                 }
-                return true;
             }
+            return true;
         } else {
             return false;
         }
-
     }
 
 

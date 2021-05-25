@@ -84,7 +84,7 @@
 
 
                     <div class="form-group col-md-12">
-                        <input id="upload"  name="btnSend" value="إرسال" class="btn btn-success btn-block">
+                        <input type="button" id="upload"  name="btnSend" value="إرسال" class="btn btn-success btn-block">
                     </div>
 
                 </div>
@@ -103,7 +103,6 @@
 
     $("#upload").click(function (e) {
         myDZ.processQueue();
-        alert("Hello");
     })
     var myDZ = new Dropzone("#dZUpload", {
         url: '<?php echo URLROOT . "/Info/add";?>',
@@ -127,6 +126,10 @@
             this.on('success', function (file, responseText) {
                 //do after successful upload
                 console.log(responseText);
+                showAlert("success","تم الاضافة بنجاح")
+                // $("#addUserForm").reset();;
+                $("#addUserForm").trigger("reset");
+                // alert(responseText);
                 // alert("success");
             })
         }
