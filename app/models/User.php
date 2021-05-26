@@ -13,17 +13,17 @@ class User
         $this->db = new Database;
     }
 
-    public function getPlants()
+    public function getUsers()
     {
-        $query = "SELECT *,Plants.isActive as 'uIsActive' FROM Plants";
+        $query = "SELECT *,users.isActive as 'uIsActive' FROM users";
         $this->db->query($query);
         $results = $this->db->resultset();
         return $results;
     }
 
-    public function getJsonPlants()
+    public function getJsonUsers()
     {
-        $query = "SELECT userId,name,userName,phoneNo,img,isActive,createdAt,centerName FROM Plants INNER JOIN faculties  ON Plants.centerId = faculties.fId";
+        $query = "SELECT userId,name,userName,phoneNo,img,isActive,createdAt,centerName FROM users INNER JOIN faculties  ON users.centerId = faculties.fId";
         $this->db->query($query);
         $results = $this->db->resultset();
         return $results;
@@ -31,15 +31,19 @@ class User
 
     public function getMaxId()
     {
-        $this->db->query("SELECT MAX(userId) AS max_id  FROM Plants");
+        $this->db->query("SELECT MAX(userId) AS max_id  FROM users");
         $row = $this->db->single();
         return $row->max_id;
     }
 
     public function addUser($data)
     {
+
+        $maxID = $this->getMaxId();
         $path_parts = pathinfo($this->imgName);
         $ext = $path_parts['extension'];
+
+
         $newName = "";
 
         if ($this->tempImgName != "") {
@@ -49,54 +53,73 @@ class User
         }
 
 
-        $this->db->query('INSERT INTO
-`stafftb`( `name`, `ename`, `title`,`cert`, `uniar`, `unien`, `colg`,email,email1,phoneNo,phoneNo1,orcid,scopus,gScholar,rGate,publons,linkedIn,researchInAr,researchInEn,researches,pExperience,file)
- VALUES (:name, :ename, :title,:cert,:uniar,:unien,:colg,:email,:email1,:phoneNo,:phoneNo1,:orcid,:scopus,:gScholar,:rGate,:publons,:linkedIn,:researchInAr,:researchInEn,:researches,:pExperience,:file)');
+        $this->db->query('INSERT INTO `users`( `name`, `userName`, `password`,`centerId`, `phoneNo`, `isActive`, `addedBy`,img)
+               VALUES (:name, :userName, :password,:centerId,:phoneNo,:isActive,:addedBy,:img)');
 
         // Bind Values
         $this->db->bind(':name', $data['name']);
-        $this->db->bind(':ename', $data['ename']);
-        $this->db->bind(':title', $data['title']);
-        $this->db->bind(':cert', $data['cert']);
-        $this->db->bind(':uniar', $data['uniar']);
-        $this->db->bind(':unien', $data['unien']);
-        $this->db->bind(':colg', $data['colg']);
-        $this->db->bind(':email', $data['email']);
-        $this->db->bind(':email1', $data['email1']);
+        $this->db->bind(':userName', $data['userName']);
+        $this->db->bind(':password', $data['password']);
+
+        $this->db->bind(':centerId', $data['centerId']);
         $this->db->bind(':phoneNo', $data['phoneNo']);
-        $this->db->bind(':phoneNo1', $data['phoneNo1']);
-        $this->db->bind(':orcid', $data['orcid']);
-        $this->db->bind(':scopus', $data['scopus']);
-        $this->db->bind(':gScholar', $data['gScholar']);
-        $this->db->bind(':rGate', $data['rGate']);
-        $this->db->bind(':publons', $data['publons']);
-        $this->db->bind(':linkedIn', $data['linkedIn']);
-        $this->db->bind(':researchInAr', $data['researchInAr']);
-        $this->db->bind(':researchInEn', $data['researchInEn']);
-        $this->db->bind(':researches', $data['researches']);
-        $this->db->bind(':pExperience', $data['pExperience']);
-        $this->db->bind(':file', $newName);
+        $this->db->bind(':isActive', $data['isActive']);
+        $this->db->bind(':addedBy', $data['addedBy']);
+        $this->db->bind(':img', $newName);
 
 
         //Execute
         if ($this->db->execute()) {
 
-            $upOne = realpath(dirname(__FILE__) . '/../..');
-            $target = $upOne . "/public/images/";
-            $finalPathName = $target . $newName;
+            if ($this->addPermission($data, $maxID + 1)) {
+                $upOne = realpath(dirname(__FILE__) . '/../..');
+                $target = $upOne . "/public/images/users/";
+                $finalPathName = $target . $newName;
 
-            // Writes the photo to the server
-            if ($this->tempImgName != "") {
-                if (move_uploaded_file($this->tempImgName, $finalPathName)) {
+                // Writes the photo to the server
+                if ($this->tempImgName != "") {
+                    if (move_uploaded_file($this->tempImgName, $finalPathName)) {
 
-                    // Tells you if its all ok
-                    // echo "The file " . basename($this->imgName) . " has been uploaded, and your information has been added to the directory";
-                } else {
-                    // Gives and error if its not
-                    //  echo "Sorry, there was a problem uploading your file.";
+                        // Tells you if its all ok
+                        // echo "The file " . basename($this->imgName) . " has been uploaded, and your information has been added to the directory";
+                    } else {
+                        // Gives and error if its not
+                        //  echo "Sorry, there was a problem uploading your file.";
+                    }
                 }
+
             }
 
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function addPermission($data, $userId)
+    {
+        // Prepare Query
+        $this->db->query('INSERT INTO permssions (user_id, addUser,addCenter,addVolu,editUser,editCenter,editVolu,deleteUser,deleteCenter,deleteVolu) 
+      VALUES (:user_id, :addUser, :addCenter,:addVolu,:editUser,:editCenter,:editVolu,:deleteUser,:deleteCenter,:deleteVolu)');
+
+        // Bind Values
+        $this->db->bind(':user_id', $userId);
+
+        $this->db->bind(':addUser', $data['addUser']);
+        $this->db->bind(':addCenter', $data['addCenter']);
+        $this->db->bind(':addVolu', $data['addVolu']);
+
+        $this->db->bind(':editUser', $data['editUser']);
+        $this->db->bind(':editCenter', $data['editCenter']);
+        $this->db->bind(':editVolu', $data['editVolu']);
+
+        $this->db->bind(':deleteUser', $data['deleteUser']);
+        $this->db->bind(':deleteCenter', $data['deleteCenter']);
+        $this->db->bind(':deleteVolu', $data['deleteVolu']);
+
+        //Execute
+        if ($this->db->execute()) {
             return true;
         } else {
             return false;
@@ -108,7 +131,7 @@ class User
     public function register($data)
     {
         // Prepare Query
-        $this->db->query('INSERT INTO Plants (name, userName,password)
+        $this->db->query('INSERT INTO users (name, userName,password)
       VALUES (:name, :userName, :password)');
 
         // Bind Values
@@ -126,8 +149,8 @@ class User
 
     public function findUserNameToChangePassword($userName)
     {
-        $this->db->query("SELECT * FROM Plants
-                                 WHERE (Plants.userName LIKE :userName)");
+        $this->db->query("SELECT * FROM users
+                                 WHERE (users.userName LIKE :userName)");
 
         $this->db->bind(':userName', $userName);
 
@@ -140,14 +163,13 @@ class User
             return false;
         }
     }
-
     // Find USer BY userName
     public function findUserByUserName($userName)
     {
-        $this->db->query("SELECT * FROM Plants
-                                WHERE (Plants.userName LIKE :userName)
-                                 and (Plants.isActive = 1)
-                                 and (Plants.isDeleted = 0)");
+        $this->db->query("SELECT * FROM users
+                                WHERE (users.userName LIKE :userName)
+                                 and (users.isActive = 1)
+                                 and (users.isDeleted = 0)");
 
         $this->db->bind(':userName', $userName);
 
@@ -165,11 +187,11 @@ class User
     public function login($userName, $password)
     {
 
-        $this->db->query("SELECT *, Plants.uImgDeleted as 'uImgD',Plants.img as 'UImg'
-                                 FROM Plants
-                                 WHERE (Plants.userName LIKE :userName)
-                                 and (Plants.isActive = 1)
-                                 and (Plants.isDeleted = 0)");
+        $this->db->query("SELECT *, users.uImgDeleted as 'uImgD',users.img as 'UImg'
+                                 FROM users
+                                 WHERE (users.userName LIKE :userName)
+                                 and (users.isActive = 1)
+                                 and (users.isDeleted = 0)");
         $this->db->bind(':userName', $userName);
 
         $row = $this->db->single();
@@ -184,7 +206,7 @@ class User
     // Find User By ID
     public function getUserById($id)
     {
-        $this->db->query("SELECT * FROM Plants WHERE id = :id");
+        $this->db->query("SELECT * FROM users WHERE id = :id");
         $this->db->bind(':id', $id);
 
         $row = $this->db->single();
@@ -195,7 +217,7 @@ class User
     public function updatePassword($data)
     {
 
-        $q = "Update `Plants` set password = :password  WHERE userId= :id ";
+        $q = "Update `users` set password = :password  WHERE userId= :id ";
 
         // Prepare Query
         $this->db->query($q);
@@ -211,11 +233,10 @@ class User
             return false;
         }
     }
-
     public function updateUser($data)
     {
 
-        $q = "Update `Plants` set " . $data["name"] . " = ?  WHERE userId= ? ";
+        $q = "Update `users` set " . $data["name"] . " = ?  WHERE userId= ? ";
 
         // Prepare Query
         $this->db->query($q);
@@ -297,7 +318,7 @@ WHERE user_id = :user_Id";
             $newName = URLROOT . "/images/statics/placeHolder.png";
         }
 
-        $q = "Update `Plants` set  img = :img,uImgDeleted=0  WHERE userId= :id ";
+        $q = "Update `users` set  img = :img,uImgDeleted=0  WHERE userId= :id ";
         $this->db->query($q);
 
 // Bind Values
@@ -309,12 +330,12 @@ WHERE user_id = :user_Id";
         if ($this->tempImgName != "") {
 
             $upOne = realpath(dirname(__FILE__) . '/../..');
-            $target = $upOne . "/public/images/Plants/";
+            $target = $upOne . "/public/images/users/";
             $finalPathName = $target . $newName;
 
-            $files = glob($target . '/' . $data['id'] . '*'); // get all file names
-            foreach ($files as $file) { // iterate files
-                if (is_file($file))
+            $files = glob($target.'/'.$data['id'].'*'); // get all file names
+            foreach($files as $file){ // iterate files
+                if(is_file($file))
                     @unlink($file); // delete file
             }
 

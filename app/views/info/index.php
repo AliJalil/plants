@@ -1,158 +1,332 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<div class="row">
-    <div class="col-md-12">
-        <div class="col-md-12 text-center">
-            <div class="rightDiv">
-               <span style="color:black">
-                   <br>
-                   <strong></strong>
-                   <br>
-                </span>
-            </div>
-        </div>
-    </div>
-</div>
-<!--<div class="row">-->
-<!--    <div class="col-md-12">-->
-<!--        --><?php //echo $results; ?>
-<!--    </div>-->
-<!--</div>-->
-<form enctype="multipart/form-data" name="addUserForm" method="post" id="addUserForm">
-    <div class="row">
+<?php require APPROOT . '/views/inc/dteditableScript.php'; ?>
 
-        <div class="col-md-12 mx-auto">
-            <div class="card card-body bg-light mt-12">
-                <div class="row">
-
-
-                    <div class="text-center col-md-12">
-                        <h3 style="color:red">معلومات النباتات</h3>
-                        <p>يرجى تعبئة جميع البيانات المطلوبة مع ملاحظات ان بعض الحقول تتطلب الملء باللغة الانكليزية</p>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="name">الاسم باللغة العربية:<sup>*</sup></label>
-                        <input type="text" name="name" class="form-control form-control-lg"
-                               value="" required>
-                        <span class="invalid-feedback"></span>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="ename">الاسم باللغة الانكليزية:<sup>*</sup></label>
-                        <input type="text" name="ename" class="form-control form-control-lg"
-                               value="" required>
-                        <span class="invalid-feedback"></span>
-                    </div>
-
-                    <div class="form-group col-md-12">
-                        <label for="researches">التفاصيل:
-                            <sup>*</sup></label>
-                        <textarea name="researches" class="form-control form-control-lg"
-                                  value="" required></textarea>
-                        <span class="invalid-feedback"></span>
-                    </div>
-
-
-                    <div class="form-group col-md-12">
-                        <label for="title">النوع<sup>*</sup></label>
-                        <select name="title" class="custom-select" id="title" required>
-                            <option value="">نوع النبته</option>
-                        </select>
-                        <span class="invalid-feedback"></span>
-                    </div>
-
-                    <div class="form-group col-md-12">
-                        <label for="file">ملف السيرة الذاتية (يرجى ملء الملف كما في القالب المرفق) : <sup>*</sup></label>
-                        <a href="<?php echo URLROOT . '/public/docs/cv_template.docx'; ?>">اضغط هنا لتحميل القالب </a>
-                        <input type="hidden" value="350000">
-                        <input class="form-control" type="file" accept="application/pdf" name="cv" id="cv" required>
-                        <span class="invalid-feedback"></span>
-                    </div>
-
-                    <div class="form-group col-md-12">
-                        <input type="submit" name="btnSend" value="إرسال" class="btn btn-success btn-block">
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
+<!--Start Header of Table-->
+<table id="progsGrid1"
+       class="table table-hover table-bordered table-striped table-resource-list table-databases" width="100%"
+       cellspacing="10px">
+    <thead>
+    <tr class="header-back-ground">
+        <th class="header-label first-header-lbl">الاسم العربي</th>
+        <th class="header-label">الاسم الانكليزي</th>
+        <th class="header-label">التفاصيل</th>
+        <th class="header-label">النوع</th>
+        <th class="header-label"> فعال</th>
+        <th class="header-label  last-header-lbl">اتخاذ اجراء</th>
+    </tr>
+    </thead>
+    <!--End of Header-->
+    <?php
+    foreach ($data['Plants'] as $plant) :
+    ?>
+    <tr>
+        <td><?php echo $plant->name ?> </td>
+        <td><?php echo $plant->eName ?> </td>
+        <td><?php echo $plant->det ?> </td>
+        <td><?php echo $plant->type ?> </td>
+        <td><?php echo $plant->isActive ?> </td>
+        <td>dsfd</td>
+    </tr>
+    <?php
+    endforeach;
+    ?>
+</table>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>
-<script src=<?php echo URLROOT . "/public/js/main.js" ?>></script>
+
 
 <script>
+    $( document ).ready( function () {
 
-    populateSelectFromDs("title", titles);
-    populateSelectFromDs("cert", certs);
-    populateSelectFromDs("colg", colg);
 
-    $(document).ready(function () {
+        var faculties = <?php echo $data['faculties']; ?>;
+        var subjects = <?php echo $data['subjects']; ?>;
+        var cities = <?php echo $data['cities']; ?>;
 
-        $("#addUserForm").submit(function (event) {
 
-                // alert($('#cv'));
-                // var x = document.getElementById('cv').files[0];
-                // alert(x);
-                //
-                // alert($("#cv")[0].files);
-                //getting form into Jquery Wrapper Instance to enable JQuery Functions on form
-                var form = $("#addUserForm");
-                //Serializing all For Input Values (not files!) in an Array Collection so that we can iterate this collection later.
-                var params = form.serializeArray();
-                //Declaring new Form Data Instance
-                var formData = new FormData();
+        var emTable = $( '#progsGrid1' ).DataTable( {
+            dom: '<"html5buttons"B>lTgitpr',
+            language: {
+                search: "_INPUT_", //To remove Search Label
+                searchPlaceholder: "ابحث هنا...",
+                "infoFiltered": "(  المجموع الكلي للسجلات المدخلة _MAX_ )",
+                "lengthMenu": "عرض _MENU_ سجل",
+                "decimal": "",
+                "emptyTable": "لا توجد بيانات لعرضها",
+                "info": "عرض من _START_ الى _END_ من مجموع _TOTAL_ سجل",
+                "infoEmpty": "عرض 0 من 0 مدخل",
+                "infoPostFix": "",
+                "thousands": "",
+                // "loadingRecords": "جار التحميل ...",
+                "processing": "جار المعالجة...",
 
-                // var bookFile = $("#file")[0].files;
-                formData.append("file",document.getElementById('cv').files[0]);
-                // alert($("#file")[0].files);
-                //Now Looping the parameters for all form input fields and assigning them as Name Value pairs.
-                $(params).each(function (index, element) {
-                    formData.append(element.name, element.value);
-                });
-
-                //disabling Submit Button so that user cannot press Submit Multiple times
-
-                $("#submit").val("جار الحفظ...");
-                $("#submit").attr("disabled", true);
-
-                $.ajax({
-                        url: '<?php echo URLROOT . "/Plants/add";?>',
-                        method: "post",
-                        data: formData,
-                        contentType: false,
-                        processData: false,
-                        success: function (data) {
-                            //Firing event if File Upload is completed!
-                            $("#submit").attr("disabled", false);
-                            $("#submit").val("حفظ");
-                            $("#file").val("");
-                            var json = $.parseJSON(data);
-                            var msg = "";
-                            var type = 'error';
-
-                            if (json == "50") {
-                                msg = 'يرجى رفع ملف السيرة الذاتية';
-                            }
-
-                            if (json == "200") {
-                                msg = 'تم استلام ردك, شكرا لك';
-                                type = 'success';
-                                $('#addUserForm').trigger("reset");
-                            }
-                            showAlert(type, msg)
+                "zeroRecords": "لا توجد بيانات مطابقة للبحث",
+                "paginate":
+                    {
+                        "first": "الاولى",
+                        "last": "الاخيرة",
+                        "next": "التالية",
+                        "previous": "السابقة"
+                    },
+                "aria": {
+                    "sortAscending": ": activate to sort column ascending",
+                    "sortDescending": ": activate to sort column descending"
+                }
+            },
+            buttons: [
+                {
+                    extend: 'copy',
+                    text: 'نسخ الى الحافظة',
+                    className: 'exportExcel',
+                    exportOptions: {
+                        modifier: {
+                            search: 'applied',
+                            order: 'applied'
                         },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            showAlert('error', "خطأ: " + errorThrown);
-                            $('#confirm_password_err').html("");
-                            $('#submit').attr("disabled", false);
-                        },
+                        columns: [0, 1, 2, 3, 4, 5,6,7,8]
                     }
-                );
-                return false;
-            }
-        );
-    });
+                },
+                {
+                    extend: 'excel',
+                    text: 'تصدير ملف اكسل',
+                    exportOptions: {
+                        modifier: {
+                            search: 'applied',
+                            order: 'applied'
+                        },
+                        columns: [0, 1, 2, 3, 4, 5,6,7,8]
+                    }
+                },
+                {
+                    extend: 'csv',
+                    text: 'تصدير ملف CVS',
+
+                    exportOptions: {
+                        modifier: {
+                            search: 'applied',
+                            order: 'applied'
+                        },
+                        columns: [0, 1, 2, 3, 4, 5,6,7,8]
+                    }
+                },
+                {
+                    extend: 'print',
+                    text: 'طباعة',
+                    exportOptions: {
+                        modifier: {
+                            search: 'applied',
+                            order: 'applied'
+                        },
+                        columns:[0, 1, 2, 3, 4, 5,6,7,8]
+                    }
+                },
+            ],
+
+            lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "الكل"]],
+            pageLength: 5,
+            fnInitComplete:
+                function () {
+                    addSearchControl();
+                }
+        } );
+
+
+
+
+        //delete Row
+        <?php if (isset($_SESSION['deleteVolu'])) :?>
+        $( document ).on( 'click', '[id^="delete-volu-"]', function () {
+            var $button = $( this );
+            var id = this.id.split( '-' ).pop();
+
+            Swal.fire( {
+                title: "حذف الصف المحدد",
+                text: "هل انت متأكد من حذف الجدول المحدد؟",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: "نعم",
+                cancelButtonText: "لا",
+                confirmButtonColor: "#ec6c62",
+                cancelButtonColor: '#d33',
+                showLoaderOnConfirm: true,
+                preConfirm: () => {
+                    return $.ajax( {
+                        url: "<?php echo URLROOT . "/tables/edit";?>",
+                        type: "POST",
+                        data: {
+                            'value': '1',
+                            'name': 'isDeleted',
+                            "pk": id
+                        },
+                        success: function () {
+                        },
+
+
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            alert( "Status: " + textStatus );
+                            alert( "خظأ: " + errorThrown );
+                        }
+                    } )
+
+                        .then( response => {
+                            try {
+                                response = $.parseJSON( response );
+                                if (response == "err") {
+                                    throw new Error( "لم يتم الحذف, حدث خطأ ما" )
+                                }
+                                return response
+                            } catch (error) {
+                                swal.close();
+                                showAlert( 'error', ` ${error.message}` );
+                            }
+                        } )
+                },
+                allowOutsideClick: () => !swal.isLoading()
+            } ).then( (result) => {
+                if (result.value) {
+                    emTable.row( $button.parents( 'tr' ) ).remove().draw();
+                    swal.close();
+                    showAlert( 'success', 'تم الحذف بنجاح' );
+                }
+            } );
+
+        } );
+        <?php endif; ?>
+        //End of delete Row
+
+        //------------------------------------
+        function addSearchControl() {
+            $( "#progsGrid1 thead" ).append( $( "#progsGrid1 thead tr:first" ).clone() );
+            $( "#progsGrid1 thead tr:eq(1) th" ).each( function (index) {
+
+
+                if (index == 0) {
+                    var y = faculties.map( faculties => faculties.text );
+                    var selectDropDown = $( "<select  class='form-control'/>" );
+                    selectDropDown.append( $( "<option/>" ).attr( "value", "" ).text( 'اختر' ) );
+                    for (let i = 0; i < y.length; i++) {
+                        selectDropDown.append( $( "<option/>" ).attr( "value", y[i] ).text( y[i] ) );
+                    }
+                    $( this ).replaceWith( "<th>" + selectDropDown.prop( "outerHTML" ) + "</th>" );
+                    var dropControl = $( "#progsGrid1 thead tr:eq(1) th:eq('" + index + "') select" );
+                    dropControl.on( "change",
+                        function () {
+                            emTable.column( index ).search( dropControl.val() ).draw();
+                        } );
+
+                } else
+                    if (index == 1) {
+                    var y = sTypes.map( sTypes => sTypes.text );
+                    var selectDropDown = $( "<select  class='form-control'/>" );
+                    selectDropDown.append( $( "<option/>" ).attr( "value", "" ).text( 'اختر' ) );
+                    for (let i = 0; i < y.length; i++) {
+                        selectDropDown.append( $( "<option/>" ).attr( "value", i+1 ).text( y[i] ) );
+                    }
+                    $( this ).replaceWith( "<th>" + selectDropDown.prop( "outerHTML" ) + "</th>" );
+                    var dropControl = $( "#progsGrid1 thead tr:eq(1) th:eq('" + index + "') select" );
+                    dropControl.on( "change",
+                        function () {
+                            emTable.column( index ).search( dropControl.val() ).draw();
+                        } );
+
+                } else
+                    if (index == 2) {
+
+                        var y = levels.map( levels => levels.text );
+                        var selectDropDown = $( "<select  class='form-control'/>" );
+                        selectDropDown.append( $( "<option/>" ).attr( "value", "" ).text( 'اختر' ) );
+                        for (let i = 0; i < y.length; i++) {
+                            selectDropDown.append( $( "<option/>" ).attr( "value",i+1 ).text( y[i] ) );
+                        }
+                        $( this ).replaceWith( "<th>" + selectDropDown.prop( "outerHTML" ) + "</th>" );
+                        var dropControl = $( "#progsGrid1 thead tr:eq(1) th:eq('" + index + "') select" );
+                        dropControl.on( "change",
+                            function () {
+                                emTable.column( index ).search( dropControl.val() ).draw();
+                            } );
+                    }
+
+                    else if (index == 3) {
+                        var y = subjects.map( subjects => subjects.text );
+                        var selectDropDown = $( "<select  class='form-control'/>" );
+                        selectDropDown.append( $( "<option/>" ).attr( "value", "" ).text( 'اختر' ) );
+                        for (let i = 0; i < y.length; i++) {
+                            selectDropDown.append( $( "<option/>" ).attr( "value", y[i] ).text( y[i] ) );
+                        }
+                        $( this ).replaceWith( "<th>" + selectDropDown.prop( "outerHTML" ) + "</th>" );
+                        var dropControl = $( "#progsGrid1 thead tr:eq(1) th:eq('" + index + "') select" );
+                        dropControl.on( "change",
+                            function () {
+                                emTable.column( index ).search( dropControl.val() ).draw();
+                            } );
+                    }
+                        // else if (index == 4) {
+                        //     var y = pTypes.map( pTypes => pTypes.text );
+                        //     var selectDropDown = $( "<select  class='form-control'/>" );
+                        //     selectDropDown.append( $( "<option/>" ).attr( "value", "" ).text( 'اختر' ) );
+                        //     for (let i = 0; i < y.length; i++) {
+                        //         selectDropDown.append( $( "<option/>" ).attr( "value",(i+1)).text( y[i] ) );
+                        //     }
+                        //     $( this ).replaceWith( "<th>" + selectDropDown.prop( "outerHTML" ) + "</th>" );
+                        //     var dropControl = $( "#progsGrid1 thead tr:eq(1) th:eq('" + index + "') select" );
+                        //     dropControl.on( "change",
+                        //         function () {
+                        //             emTable.column( index ).search( dropControl.val() ).draw();
+                        //         } );
+                        // }
+                    if (index == 4) {
+
+                        var y = cities.map( cities => cities.text );
+                        var selectDropDown = $( "<select  class='form-control'/>" );
+                        selectDropDown.append( $( "<option/>" ).attr( "value", "" ).text( 'اختر' ) );
+                        for (let i = 0; i < y.length; i++) {
+                            selectDropDown.append( $( "<option/>" ).attr( "value", y[i]).text( y[i] ) );
+                        }
+                        $( this ).replaceWith( "<th>" + selectDropDown.prop( "outerHTML" ) + "</th>" );
+                        var dropControl = $( "#progsGrid1 thead tr:eq(1) th:eq('" + index + "') select" );
+                        dropControl.on( "change",
+                            function () {
+                                emTable.column( index ).search( dropControl.val() ).draw();
+                            } );
+                    }
+                    else
+                    if ( index == 7 ||index == 8 ) {
+                        $( this ).replaceWith( "<th><input type='text' class='form-control' placeholder='ابحث" +
+                            "'></input></th>'" );
+                        var searchControl = $( "#progsGrid1 thead tr:eq(1) th:eq('" + index + "') input" );
+                        searchControl.on( "keyup",
+                            function (e) {
+                                if (e.key === 'Enter' || e.keyCode === 13) {
+                                    // Do something
+                                    emTable.column( index ).search( searchControl.val() ).draw();
+                                }
+                            } );
+                    } else
+                    if (index == 5) {
+                        var y = days.map( days => days.text );
+                        var selectDropDown = $( "<select  class='form-control'/>" );
+                        selectDropDown.append( $( "<option/>" ).attr( "value", "" ).text( 'اختر' ) );
+                        for (let i = 0; i < y.length; i++) {
+                            selectDropDown.append( $( "<option/>" ).attr( "value",i+1 ).text( y[i] ) );
+                        }
+                        $( this ).replaceWith( "<th>" + selectDropDown.prop( "outerHTML" ) + "</th>" );
+                        var dropControl = $( "#progsGrid1 thead tr:eq(1) th:eq('" + index + "') select" );
+                        dropControl.on( "change",
+                            function () {
+                                emTable.column( index ).search( dropControl.val() ).draw();
+                            } );
+                    }
+                    else {
+                    $( this ).replaceWith( "<th></th>" );
+                }
+            } );
+        }
+    } );
 </script>
 
+<style>
+    a {
+        color: #686868;
+    }
+    /* CSS link color */
+</style>

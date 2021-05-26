@@ -10,27 +10,22 @@ class Info extends Controller
 
     public function index()
     {
-//        if (!$this->isLoggedIn()) {
-//            redirect('Plants/login');
-//        }
-//        if (isset($_SESSION['editCenter'])
-//            || isset($_SESSION['deleteCenter'])) {
+        if (!$this->isLoggedIn()) {
+            redirect('Plants/login');
+        }
+        if (isset($_SESSION['user_id'])) {
             $Plants = $this->plantModel->getPlants();
-
-            $cities = $this->cityModel->getJsonCities();
 
             $data = [
                 'Plants' => $Plants,
-                'cities' => $cities
             ];
 
-            $this->publicFunc->styling("user-nav");
+//            $this->publicFunc->styling("user-nav");
 
-            $this->view('Info/index', $data);
-//        } else {
-//
-//            redirect('Info');
-//        }
+            $this->view('info/index', $data);
+        } else {
+            redirect('info');
+        }
 
     }
 
@@ -105,57 +100,55 @@ class Info extends Controller
     public function add()
     {
 
-//        if (isset($_SESSION['addUser'])) {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // Sanitize POST
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        if (isset($_SESSION['user_id'])) {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                // Sanitize POST
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            if (isset($_FILES['imgs']) == '') {
-                $Post_error = "50";
+                if (isset($_FILES['imgs']) == '') {
+                    $Post_error = "50";
+                    echo json_encode(array($Post_error));
+                    die();
+                }
+                $this->plantModel->setImgName($_FILES['imgs']['tmp_name'], $_FILES['imgs']['name']);
+                $data = [
+                    'name' => trim($_POST['name']),
+                    'ename' => trim($_POST['ename']),
+                    'det' => trim($_POST['det']),
+                    'type' => trim($_POST['type']),
+                ];
+
+                if ($this->plantModel->addPlant($data)) {
+
+                } else {
+                    die();
+                }
+
+                $Post_error = "200";
                 echo json_encode(array($Post_error));
                 die();
-            }
-            $this->plantModel->setImgName($_FILES['imgs']['tmp_name'], $_FILES['imgs']['name']);
-            $data = [
-                'name' => trim($_POST['name']),
-                'ename' => trim($_POST['ename']),
-                'det' => trim($_POST['det']),
-                'type' => trim($_POST['type']),
-            ];
-
-            if ($this->plantModel->addPlant($data)) {
 
             } else {
-                die();
+                // IF NOT A POST REQUEST
+                $Plants = $this->plantModel->getPlants();
+                $data = [
+                    'Plants' => $Plants,
+                ];
+                $this->publicFunc->styling("user-nav");
+                // Load View
+                $this->view('Info/add', $data);
             }
-
-            $Post_error = "200";
-            echo json_encode(array($Post_error));
-            die();
-
         } else {
-            // IF NOT A POST REQUEST
-            $Plants = $this->plantModel->getPlants();
-
-//            $cities = $this->cityModel->getJsonCities();
-
-            $data = [
-                'Plants' => $Plants,
-            ];
-            $this->publicFunc->styling("user-nav");
-            // Load View
-            $this->view('Info/add', $data);
+            redirect('users/login');
         }
+
     }
 
     public function login()
     {
-        // Check if logged in
-//        if ($this->isLoggedIn()) {
-//            redirect('Science');
-//        }
+//         Check if logged in
         if ($this->isLoggedIn()) {
-            redirect('science/index');
+            redirect('Info/index');
         }
 
         // Check if POST

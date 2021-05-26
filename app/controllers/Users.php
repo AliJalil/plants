@@ -1,6 +1,6 @@
 <?php
 
-class Plants extends Controller
+class Users extends Controller
 {
     public function __construct()
     {
@@ -105,77 +105,165 @@ class Plants extends Controller
 
     public function add()
     {
+        if (!$this->isLoggedIn()) {
+            redirect('users/loginWeb');
+        }
 
-//        if (isset($_SESSION['addUser'])) {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // Sanitize POST
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        if (isset($_SESSION['addUser'])) {
 
-            if (isset($_FILES['file']) == '') {
-                $Post_error = "50";
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                // Sanitize POST
+
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+                if (isset($_FILES['img']) != '') {
+
+                    $filename = $_FILES['img']['tmp_name'];
+                    $size = getimagesize($filename);
+                    if ($size === false) {
+                        $Post_error = "50";
+                        echo json_encode(array($Post_error));
+                        die();
+                    }
+                    if ($size[0] > 5000 || $size[1] > 5000) {
+                        $Post_error = "50";
+                        echo json_encode(array($Post_error));
+                        die();
+                    }
+                    if (!$img = @imagecreatefromstring(file_get_contents($filename))) {
+                        $Post_error = "50";
+                        echo json_encode(array($Post_error));
+                        die();
+                    }
+
+                    $this->userModel->setImgName($_FILES['img']['tmp_name'], $_FILES['img']['name']);
+                }
+
+                $data = [
+                    'name' => trim($_POST['name']),
+                    'userName' => trim($_POST['userName']),
+                    'password' => trim($_POST['password']),
+                    'confirm_password' => trim($_POST['confirm_password']),
+                    'uPoint' => trim($_POST['uPoint']),
+                    'phoneNo' => trim($_POST['phoneNo']),
+                    'isActive' => trim($_POST['isActive']),
+                    'isAdmin' => "1",
+                    'addedBy' => $_SESSION['user_id'],
+
+                    'addUser' =>  isset($_POST['addUser']) != '' ? trim($_POST['addUser'] ): '0',
+                    'editUser' =>  isset($_POST['editUser']) != '' ? trim($_POST['editUser'] ): '0',
+                    'deleteUser' =>  isset($_POST['deleteUser']) != '' ? trim($_POST['deleteUser'] ): '0',
+
+                    'addUserPoint' =>  isset($_POST['addUserPoint']) != '' ? trim($_POST['addUserPoint'] ): '0',
+                    'editUserPoint' =>  isset($_POST['editUserPoint']) != '' ? trim($_POST['editUserPoint'] ): '0',
+                    'deleteUserPoint' =>  isset($_POST['deleteUserPoint']) != '' ? trim($_POST['deleteUserPoint'] ): '0',
+
+                    'addPoint' =>  isset($_POST['addPoint']) != '' ? trim($_POST['addPoint'] ): '0',
+                    'editPoint' =>  isset($_POST['editPoint']) != '' ? trim($_POST['editPoint'] ): '0',
+                    'deletePoint' =>  isset($_POST['deletePoint']) != '' ? trim($_POST['deletePoint'] ): '0',
+
+                    'addReport' =>  isset($_POST['addReport']) != '' ? trim($_POST['addReport'] ): '0',
+                    'editReport' =>  isset($_POST['editReport']) != '' ? trim($_POST['editReport'] ): '0',
+                    'deleteReport' =>  isset($_POST['deleteReport']) != '' ? trim($_POST['deleteReport'] ): '0',
+
+                    'addCar' =>  isset($_POST['addCar']) != '' ? trim($_POST['addCar'] ): '0',
+                    'editCar' =>  isset($_POST['editCar']) != '' ? trim($_POST['editCar'] ): '0',
+                    'deleteCar' =>  isset($_POST['deleteCar']) != '' ? trim($_POST['deleteCar'] ): '0'
+                ];
+
+                // Validate userName
+                if (empty($data['userName'])) {
+                    $Post_error = "10";
+                    echo json_encode(array($Post_error));
+                    die();
+                } else if (preg_match("/[^a-zA-Z0-9]+/", $data['userName'])) {
+                    $Post_error = "11";
+                    echo json_encode(array($Post_error));
+                    die();
+                } else {
+                    // Check userName
+                    if ($this->userModel->findUserByUserName($data['userName'])) {
+                        $Post_error = "12";
+                        echo json_encode(array($Post_error));
+                        die();
+                    }
+                }
+
+                if (empty($data['name'])) {
+                    $Post_error = "20";
+                    echo json_encode(array($Post_error));
+                    die();
+                }
+
+
+                // Validate password
+                if (empty($data['password'])) {
+                    $Post_error = "30";
+                    echo json_encode(array($Post_error));
+                    die();
+
+                } elseif (strlen($data['password']) < 8) {
+                    $Post_error = "31";
+                    echo json_encode(array($Post_error));
+                    die();
+                }
+
+                // Validate confirm password
+                if (empty($data['confirm_password'])) {
+                    $Post_error = "40";
+                    echo json_encode(array($Post_error));
+                    die();
+                } else {
+                    if ($data['password'] != $data['confirm_password']) {
+                        $Post_error = "41";
+                        echo json_encode(array($Post_error));
+                        die();
+                    }
+                }
+
+                // Make sure errors are empty
+                // SUCCESS - Proceed to insert
+
+                // Hash Password
+                $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+                //Execute
+                if ($this->userModel->add($data)) {
+
+                } else {
+                    die();
+                }
+
+                $Post_error = "200";
                 echo json_encode(array($Post_error));
                 die();
-            }
-            $this->userModel->setImgName($_FILES['file']['tmp_name'], $_FILES['file']['name']);
-            $data = [
-                'name' => trim($_POST['name']),
-                'ename' => trim($_POST['ename']),
-                'title' => trim($_POST['title']),
-                'cert' => trim($_POST['cert']),
-                'uniar' => trim($_POST['uniar']),
-                'unien' => trim($_POST['unien']),
-                'colg' => trim($_POST['colg']),
-                'email' => trim($_POST['email']),
-                'email1' => trim($_POST['email1']),
-                'phoneNo' => trim($_POST['phoneNo']),
-                'phoneNo1' => trim($_POST['phoneNo1']),
-                'orcid' => trim($_POST['orcid']),
-                'scopus' => trim($_POST['scopus']),
-                'gScholar' => trim($_POST['gScholar']),
-                'rGate' => trim($_POST['rGate']),
-                'publons' => trim($_POST['publons']),
-                'linkedIn' => trim($_POST['linkedIn']),
-                'researchInAr' => trim($_POST['researchInAr']),
-                'researchInEn' => trim($_POST['researchInEn']),
-                'researches' => trim($_POST['researches']),
-                'pExperience' => trim($_POST['pExperience']),
-            ];
-
-            if ($this->userModel->addUser($data)) {
 
             } else {
-                die();
+                // IF NOT A POST REQUEST
+                $points = $this->pointModel->getJsonPoints(-1);
+                $data = [
+                    'points' => $points
+                ];
+
+                $this->publicFunc->styling("user-nav");
+                // Load View
+                $this->view('users/add', $data);
             }
-
-            $Post_error = "200";
-            echo json_encode(array($Post_error));
-            die();
-
         } else {
-            // IF NOT A POST REQUEST
-            $Plants = $this->userModel->getPlants();
-
-            $cities = $this->cityModel->getJsonCities();
-
-            $data = [
-                'Plants' => $Plants,
-
-                'cities' => $cities
-            ];
-            $this->publicFunc->styling("user-nav");
-            // Load View
-            $this->view('Plants/add', $data);
+            redirect('users');
         }
+        // Check if POST
+
     }
 
     public function login()
     {
+
         // Check if logged in
 //        if ($this->isLoggedIn()) {
 //            redirect('Science');
 //        }
         if ($this->isLoggedIn()) {
-            redirect('science/index');
+            redirect('info/add');
         }
 
         // Check if POST
@@ -193,14 +281,14 @@ class Plants extends Controller
             // Check for email
             if (empty($data['userName'])) {
                 $Post_error = "10";
-                echo json_encode(array($Post_error));
+                echo json_encode(Array($Post_error));
                 die();
             }
 
             // Check for name
             if (empty($data['password'])) {
                 $Post_error = "11";
-                echo json_encode(array($Post_error));
+                echo json_encode(Array($Post_error));
                 die();
             }
 
@@ -211,7 +299,7 @@ class Plants extends Controller
             } else {
                 // No User
                 $Post_error = "12";
-                echo json_encode(array($Post_error));
+                echo json_encode(Array($Post_error));
                 die();
             }
 
@@ -220,11 +308,11 @@ class Plants extends Controller
 
             if ($loggedInUser) {
                 // User Authenticated!
-                $this->createPlantsession($loggedInUser);
+                $this->createUserSession($loggedInUser);
 
             } else {
                 $Post_error = "12";
-                echo json_encode(array($Post_error));
+                echo json_encode(Array($Post_error));
                 die();
             }
         } else {
@@ -234,12 +322,12 @@ class Plants extends Controller
                 'password' => ''
             ];
             //Load View
-            $this->view('Plants/login', $data);
+            $this->view('users/login', $data);
         }
     }
 
     // Create Session With User Info
-    public function createPlantsession($user)
+    public function createUserSession($user)
     {
         $_SESSION['user_id'] = $user->userId;
         $_SESSION['user_name'] = $user->userName;
@@ -250,9 +338,9 @@ class Plants extends Controller
 
         $_SESSION['UImg'] = $user->UImg;
 
-        if ($user->uImgD == 0) {
-            $_SESSION['uImgD'] = $user->addUser;
-        }
+//        if ($user->uImgD == 0) {
+//            $_SESSION['uImgD'] = $user->img;
+//        }
 
         $Post_error = "1";
         echo json_encode(array($Post_error));
