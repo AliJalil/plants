@@ -4,7 +4,7 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="<?php echo URLROOT . "/public/css/bootstrap-rtl.min.css"?>" crossorigin="anonymous">
+    <link rel="stylesheet" href="<?php echo URLROOT . "/public/vendor/bootstrap/css/bootstrap-arabic.min.css"; ?>">
     <link rel="stylesheet" href="<?php echo URLROOT . "/public/css/fontAwesome.css"?>" crossorigin="anonymous">
     <title>جامعة الكفيل</title>
 

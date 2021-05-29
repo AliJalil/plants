@@ -13,7 +13,7 @@ class Plant
 
     public function getPlants()
     {
-        $query = "SELECT *,planttb.isActive as 'pIsActive' FROM planttb";
+        $query = "SELECT *,planttb.isActive as 'pIsActive' FROM planttb where isDeleted = 0";
         $this->db->query($query);
         $results = $this->db->resultset();
         return $results;

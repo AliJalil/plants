@@ -1,0 +1,21 @@
+
+
+@font-face {
+    font-family: 'TheSans Bold';
+    font-style: normal;
+    font-weight: 700;
+    src: url(../fonts/TheSans-Bold.eot);
+    src: url(../fonts/TheSans-Bold.eot?#iefix) format('embedded-opentype'),
+    url(../fonts/TheSans-Bold.woff2) format('woff2'),
+    url(../fonts/TheSans-Bold.woff) format('woff'),
+    url(../fonts/TheSans-Bold.ttf) format('truetype');
+
+}
+
+.TheSans-Bold {
+    font-family: 'TheSans Bold', serif;
+}
+* {
+    font-family: "TheSans Bold";
+    font-size: 12px;
+}

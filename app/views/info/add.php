@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
-
+<link rel="stylesheet" href="<?php echo URLROOT . "/public/css/addCss.css" ?>">
 <link rel="stylesheet" href="<?php echo URLROOT . "/public/vendor/dropzone/dropzone.css" ?>">
 <script type="text/javascript" src="<?php echo URLROOT . "/public/vendor/dropzone/dropzone.min.js" ?>"></script>
 

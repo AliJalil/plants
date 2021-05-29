@@ -392,7 +392,7 @@ class Info extends Controller
     public function edit()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (isset($_SESSION['editUser'])) {
+//            if (isset($_SESSION['editUser'])) {
 
                 // Sanitize POST
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
@@ -421,14 +421,14 @@ class Info extends Controller
                         }
                     }
 
-                } else {
-                    $Post_error = "err";
-                    echo json_encode(array($Post_error));
-                    die();
-                }
+//                } else {
+//                    $Post_error = "err";
+//                    echo json_encode(array($Post_error));
+//                    die();
+//                }
 
 
-                if ($this->plantModel->updateUser($data)) {
+                if ($this->plantModel->updatePlant($data)) {
                     $Post_error = "succ";
                     echo json_encode(array($Post_error));
                 } else {
