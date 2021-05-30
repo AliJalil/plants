@@ -30,6 +30,9 @@
                 <div style="margin-top: 5px">
                     <button id="delete-volu-<?php echo $plant->pId ?>" title="حذف السجل الحالي"> <span class="glyphicon glyphicon-trash"></span></button>
                 </div>
+                <div style="margin-top: 5px">
+                    <button onclick="window.location.assign('<?php echo URLROOT . "/Info/update";?>')"  id="edit-plant-<?php echo $plant->pId ?>" title="تعديل"> <span class="glyphicon glyphicon-pencil"></span></button>
+                </div>
             </td>
         </tr>
     <?php

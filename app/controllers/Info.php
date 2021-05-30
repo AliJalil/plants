@@ -5,7 +5,7 @@ class Info extends Controller
     public function __construct()
     {
         $this->plantModel = $this->model('Plant');
-        $this->publicFunc = new PublicFunc;
+//        $this->publicFunc = new PublicFunc;
     }
 
     public function index()
@@ -134,7 +134,7 @@ class Info extends Controller
                 $data = [
                     'Plants' => $Plants,
                 ];
-                $this->publicFunc->styling("user-nav");
+//                $this->publicFunc->styling("user-nav");
                 // Load View
                 $this->view('Info/add', $data);
             }
@@ -144,122 +144,53 @@ class Info extends Controller
 
     }
 
-    public function login()
+    public function update($pId = 0)
     {
-//         Check if logged in
-        if ($this->isLoggedIn()) {
-            redirect('Info/index');
-        }
 
-        // Check if POST
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // Sanitize POST
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        if (isset($_SESSION['user_id'])) {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                // Sanitize POST
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            $data = [
-                'userName' => trim($_POST['userName']),
-                'password' => trim($_POST['password']),
-                'email_err' => '',
-                'password_err' => '',
-            ];
+                if (isset($_FILES['imgs']) == '') {
+                    $Post_error = "50";
+                    echo json_encode(array($Post_error));
+                    die();
+                }
+                $this->plantModel->setImgName($_FILES['imgs']['tmp_name'], $_FILES['imgs']['name']);
+                $data = [
+                    'name' => trim($_POST['name']),
+                    'ename' => trim($_POST['ename']),
+                    'det' => trim($_POST['det']),
+                    'type' => trim($_POST['type']),
+                ];
 
-            // Check for email
-            if (empty($data['userName'])) {
-                $Post_error = "10";
+                if ($this->plantModel->addPlant($data)) {
+
+                } else {
+                    die();
+                }
+
+                $Post_error = "200";
                 echo json_encode(array($Post_error));
                 die();
-            }
-
-            // Check for name
-            if (empty($data['password'])) {
-                $Post_error = "11";
-                echo json_encode(array($Post_error));
-                die();
-            }
-
-            // Check for user
-            if ($this->plantModel->findUserByUserName($data['userName'])) {
-                // User Found
 
             } else {
-                // No User
-                $Post_error = "12";
-                echo json_encode(array($Post_error));
-                die();
-            }
-
-            // Check and set logged in user
-            $loggedInUser = $this->plantModel->login($data['userName'], $data['password']);
-
-            if ($loggedInUser) {
-                // User Authenticated!
-                $this->createPlantsession($loggedInUser);
-
-            } else {
-                $Post_error = "12";
-                echo json_encode(array($Post_error));
-                die();
+                // IF NOT A POST REQUEST
+                $Plant = $this->plantModel->getPlantById($pId);
+//                $data = [
+//                    'Plants' => $Plants,
+//                ];
+//                $this->publicFunc->styling("user-nav");
+                // Load View
+                $this->view('Info/update', $Plant);
             }
         } else {
-
-            $data = [
-                'userName' => '',
-                'password' => ''
-            ];
-            //Load View
-            $this->view('Plants/login', $data);
-        }
-    }
-
-    // Create Session With User Info
-    public function createPlantsession($user)
-    {
-        $_SESSION['user_id'] = $user->userId;
-        $_SESSION['user_name'] = $user->userName;
-        $_SESSION['Uname'] = $user->name;
-        $_SESSION['center_name'] = "جامعة الكفيل";
-        $_SESSION['cPhone'] = "0";
-        $_SESSION['uCenterId'] = "0";
-
-        $_SESSION['UImg'] = $user->UImg;
-
-        if ($user->uImgD == 0) {
-            $_SESSION['uImgD'] = $user->addUser;
+            redirect('users/login');
         }
 
-        $Post_error = "1";
-        echo json_encode(array($Post_error));
     }
 
-    // Logout & Destroy Session
-    public function logout()
-    {
-        unset($_SESSION['user_id']);
-        unset($_SESSION['user_name']);
-        unset($_SESSION['Uname']);
-        unset($_SESSION['center_name']);
-        unset($_SESSION['cPhone']);
-        unset($_SESSION['uCenterId']);
-
-        unset($_SESSION['UImg']);
-        unset($_SESSION['uImgD']);
-
-        unset($_SESSION['addUser']);
-        unset($_SESSION['addCenter']);
-        unset($_SESSION['addVolu']);
-
-        unset($_SESSION['editUser']);
-        unset($_SESSION['editCenter']);
-        unset($_SESSION['editVolu']);
-
-        unset($_SESSION['deleteUser']);
-        unset($_SESSION['deleteCenter']);
-        unset($_SESSION['deleteVolu']);
-
-
-        session_destroy();
-        redirect('science/index');
-    }
 
     // Check Logged In
     public function isLoggedIn()
@@ -272,122 +203,6 @@ class Info extends Controller
     }
 
 
-    public function changePassword()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            if (isset($_SESSION['editUser'])) {
-
-                // Sanitize POST
-                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
-
-                $data = [
-                    'userName' => trim($_POST['userName']),
-                    'newPassword' => trim($_POST['newPassword']),
-                    'newPasswordConfiorm' => trim($_POST['newPasswordConfiorm']),
-                    'id' => trim($_POST['lId'])
-
-                ];
-
-
-                if (empty($data['userName']) || empty($data['newPassword']) || empty($data['newPasswordConfiorm'])) {
-                    $Post_error = "40";
-                    echo json_encode(array($Post_error));
-                    die();
-                }
-
-                if ($data['newPassword'] != $data['newPasswordConfiorm']) {
-                    $Post_error = "41";
-                    echo json_encode(array($Post_error));
-                    die();
-                }
-
-
-//                $loggedInUser = $this->plantModel->login($data['userName'], $data['prePassword']);
-
-                // Check for user
-                if ($this->plantModel->findUserNameToChangePassword($data['userName'])) {
-                    // User Found
-                    $dataU['password'] = password_hash($data['newPassword'], PASSWORD_DEFAULT);
-                    $dataU['id'] = $data['id'];
-
-                    if ($this->plantModel->updatePassword($dataU)) {
-                        $Post_error = "succ";
-                        echo json_encode(array($Post_error));
-                    } else {
-
-                        die('error');
-                    }
-
-                } else {
-                    die('user Not found');
-                }
-            } else {
-                //Not Authorized to Edit User
-                die('Not authorized');
-            }
-        } else {
-
-            $this->index();
-        }
-    }
-
-    public function changePermission()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            if (isset($_SESSION['editUser'])) {
-
-                // Sanitize POST
-                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
-
-
-                $data = [
-                    'addUser' => trim($_POST['addUser']),
-                    'editUser' => trim($_POST['editUser']),
-                    'deleteUser' => trim($_POST['deleteUser']),
-
-                    'addCenter' => trim($_POST['addCenter']),
-                    'editCenter' => trim($_POST['editCenter']),
-                    'deleteCenter' => trim($_POST['deleteCenter']),
-
-                    'addVolu' => trim($_POST['addVolu']),
-                    'editVolu' => trim($_POST['editVolu']),
-                    'deleteVolu' => trim($_POST['deleteVolu']),
-                    'user_Id' => trim($_POST['lId'])
-
-                ];
-
-
-                if (!isset($data['addUser']) || !isset($data['editUser']) || !isset($data['deleteUser'])
-                    || !isset($data['addCenter']) || !isset($data['editCenter']) || !isset($data['deleteCenter'])
-                    || !isset($data['addVolu']) || !isset($data['editVolu']) || !isset($data['deleteVolu'])
-                    || !isset($data['user_Id'])) {
-
-                    $Post_error = "40";
-                    echo json_encode(array($Post_error));
-                    die();
-                }
-
-
-                if ($this->plantModel->changePermission($data)) {
-                    $Post_error = "succ";
-                    echo json_encode(array($Post_error));
-                } else {
-
-                    die('error');
-                }
-
-
-            } else {
-                //Not Authorized to Edit User
-                die();
-            }
-        } else {
-
-            $this->index();
-        }
-    }
 
     public function edit()
     {

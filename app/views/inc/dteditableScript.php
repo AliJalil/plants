@@ -8,12 +8,12 @@
 <script type="text/javascript"
         src="<?php echo URLROOT . "/public/js/DataTables/Buttons-1.5.4/js/buttons.print.min.js"; ?>"></script>
 
-<script src="<?php echo URLROOT . "/public/js/bootstrap-editable.js"; ?>"></script>
+<!--<script src="--><?php //echo URLROOT . "/public/js/bootstrap-editable.js"; ?><!--"></script>-->
 <script src="<?php echo URLROOT . "/public/js/main.js" ?>"></script>
 <link rel="stylesheet" type="text/css"
       href="<?php echo URLROOT . "/public/js/DataTables/Buttons-1.5.4/css/buttons.dataTables.min.css"; ?>"/>
 
-<link rel="stylesheet" href="<?php echo URLROOT . "/public/css/bootstrap-editable.css"; ?>"/>
+<!--<link rel="stylesheet" href="--><?php //echo URLROOT . "/public/css/bootstrap-editable.css"; ?><!--"/>-->
 
 <link href=<?php echo URLROOT . "/public/css/myStyle.css" ?> rel="stylesheet">
 <link href=<?php echo URLROOT . "/public/css/myDataTable.css" ?> rel="stylesheet">

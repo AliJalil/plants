@@ -87,27 +87,6 @@ class Plant
     }
 
 
-    // Add User / Register
-    public function register($data)
-    {
-        // Prepare Query
-        $this->db->query('INSERT INTO planttb (name, userName,password)
-      VALUES (:name, :userName, :password)');
-
-        // Bind Values
-        $this->db->bind(':name', $data['name']);
-        $this->db->bind(':userName', $data['userName']);
-        $this->db->bind(':password', $data['password']);
-
-        //Execute
-        if ($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
     // Find User By ID
     public function getPlantById($id)
     {

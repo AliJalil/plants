@@ -185,16 +185,16 @@
                                      class="img-circle" style="margin:20px;  width:60px; height:60px">
                             </li>
 
-                            <li style="margin:10px" role="presentation"><?php echo trim($_SESSION['Uname']) ?></li>
-                            <li role="presentation">
-                                <div class="user-info-div" style="background: #5c5c5c; ">
-                                    <?php echo $_SESSION['point_name'] ?></div>
-                            </li>
-                            <li role="presentation">
-                                <div class="user-info-div" style="background: #4f4f4f;">
-                                    <?php echo $_SESSION['cPhone'] ?>
-                                </div>
-                            </li>
+<!--                            <li style="margin:10px" role="presentation">--><?php //echo trim($_SESSION['Uname']) ?><!--</li>-->
+<!--                            <li role="presentation">-->
+<!--                                <div class="user-info-div" style="background: #5c5c5c; ">-->
+<!--                                    --><?php //echo $_SESSION['point_name'] ?><!--</div>-->
+<!--                            </li>-->
+<!--                            <li role="presentation">-->
+<!--                                <div class="user-info-div" style="background: #4f4f4f;">-->
+<!--                                    --><?php //echo $_SESSION['cPhone'] ?>
+<!--                                </div>-->
+<!--                            </li>-->
 
                             <li role="presentation"><a role="menuitem" tabindex="-1"
                                                        href="<?php echo URLROOT; ?>/users/logout">
