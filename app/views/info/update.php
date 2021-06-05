@@ -85,8 +85,10 @@
                     </div>
 
 
+                    <div id="botofform"></div>
+
                     <div class="form-group col-md-12">
-                        <input type="button" id="upload"  name="btnSend" value="إرسال" class="btn btn-success btn-block">
+                        <input type="button" id="upload" name="btnSend" value="إرسال" class="btn btn-success btn-block">
                     </div>
 
                 </div>
@@ -103,44 +105,78 @@
     populateSelectFromDs("type", titles);
     Dropzone.autoDiscover = false;
 
+
     var myDZ = new Dropzone("#dZUpload", {
-        url: '<?php echo URLROOT . "/Info/add";?>',
+        url: '<?php echo URLROOT . "/Info/update";?>',
+        acceptedFiles: 'image/*',
         addRemoveLinks: true,
         autoProcessQueue: false,
         uploadMultiple: true,
         parallelUploads: 100,
-        maxFiles: 10,
+        maxFiles: 15, // Maximum Number of Files
+        maxFilesize: 8,// MB
         paramName: 'imgs',
         clickable: true,
+        dictRemoveFile: 'Remove',
+        dictFileTooBig: 'Image is bigger than 8MB',
+        dictMaxFilesExceeded: "You can only upload upto 5 images",
+        dictCancelUploadConfirmation: "Are you sure to cancel upload?",
+        autoQueue : true,
 
         init: function () {
-
 
             <?php
             foreach (json_decode($plant->imgs) as $imgName ):
             ?>
 
-            var mockFile = { name: "<?php echo $imgName;?>", size: 12345, type: 'image/jpeg' };
+            var mockFile = {
+                name: "<?php echo $imgName;?>",
+                size: 12345
+            };
+
             this.options.addedfile.call(this, mockFile);
-            this.options.thumbnail.call(this, mockFile, "<?php echo  checkImg($imgName) ?>");
-            mockFile.previewElement.classList.add('dz-success');
-            mockFile.previewElement.classList.add('dz-complete');
+            this.options.thumbnail.call(this, mockFile, "<?php echo checkImg($imgName) ?>");
+            this.options.complete.call(this, mockFile);
+            this.options.success.call(this, mockFile);
+            this.files.push(mockFile);
+            $(mockFile.previewElement).attr('data-id', 12345); //add data-id to preview div
+            $('#botofform').append('<input type="text" class="cimages" name="cimages[]" data-id = "' + 1 + '" value="' + "<?php echo $imgName;?>" + '" sort="' + 'x' + '">'); //append image value(name) and data-id(id) and sort(value as well)
+
+
+
+            //var mockFile = {name: "<?php //echo $imgName;?>//", size: 12345, type: 'image/jpeg'};
+            //this.options.addedfile.call(this, mockFile);
+            //this.options.thumbnail.call(this, mockFile, "<?php //echo checkImg($imgName) ?>//");
+            //mockFile.previewElement.classList.add('dz-success');
+            //mockFile.previewElement.classList.add('dz-complete');
             <?php endforeach; ?>
 
 
-            this.on('sending', function (xhr, fd1, fd2) {
+
+            alert($('#dZUpload').get(0).dropzone);
+
+
+            this.on('maxfilesexceeded', function (file) {
+                this.removeAllFiles();
+                this.addFile(file);
+            });
+
+            this.on('sending', function (xhr, fd1, formData) {
+                alert(mockFile);
                 //append extra data here
-                fd2.append("name", $("#name").val());
-                fd2.append("ename", $("#ename").val());
-                fd2.append("det", $("#det").val());
-                fd2.append("type", $("#type").val());
+                this.files.push(mockFile);
+                formData.append("name", $("#name").val());
+                formData.append("ename", $("#ename").val());
+                formData.append("det", $("#det").val());
+                formData.append("type", $("#type").val());
+                formData.append("mockFile",mockFile);
                 // alert("testname");
             });
 
             this.on('success', function (file, responseText) {
                 //do after successful upload
                 console.log(responseText);
-                showAlert("success","تم الاضافة بنجاح")
+                showAlert("success", "تم الاضافة بنجاح")
                 // $("#addUserForm").reset();;
                 $("#addUserForm").trigger("reset");
                 // alert(responseText);
@@ -149,11 +185,71 @@
         }
     });
 
-
-    // myDZ.emit("thumbnail", mockFile, "https://i.pcmag.com/imagery/reviews/03aizylUVApdyLAIku1AvRV-39.1605559903.fit_scale.size_760x427.png");
-
-
     $("#upload").click(function (e) {
         myDZ.processQueue();
     })
+
+    //var myDZ = new Dropzone("#dZUpload", {
+    //    url: '<?php //echo URLROOT . "/Info/update";?>//',
+    //    addRemoveLinks: true,
+    //    autoProcessQueue: false,
+    //    uploadMultiple: true,
+    //    parallelUploads: 100,
+    //    maxFiles: 10,
+    //    paramName: 'imgs',
+    //    clickable: true,
+    //
+    //    init: function () {
+    //
+    //        console.log('initializing requestFileUpload ...');
+    //        this.on('error', function(file, response) {
+    //            console.log("error requestFileUpload");
+    //        });
+    //
+    //        <?php
+    //        foreach (json_decode($plant->imgs) as $imgName ):
+    //        ?>
+    //
+    //        var mockFile = { name: "<?php //echo $imgName;?>//", size: 12345, type: 'image/jpeg' };
+    //        this.options.addedfile.call(this, mockFile);
+    //        this.options.thumbnail.call(this, mockFile, "<?php //echo  checkImg($imgName) ?>//");
+    //        mockFile.previewElement.classList.add('dz-success');
+    //        mockFile.previewElement.classList.add('dz-complete');
+    //        <?php //endforeach; ?>
+    //
+    //
+    //        this.on("drop", function(event) {
+    //            alert("Form Action URL:- ");
+    //            //Put your ajax call here for upload image
+    //            // console.log(myDZ.files);
+    //        });
+    //
+    //        this.on('sending', function (xhr, fd1, fd2) {
+    //            alert('sending');
+    //            //append extra data here
+    //            fd2.append("name", $("#name").val());
+    //            fd2.append("ename", $("#ename").val());
+    //            fd2.append("det", $("#det").val());
+    //            fd2.append("type", $("#type").val());
+    //            // alert("testname");
+    //        });
+    //
+    //        this.on('success', function (file, responseText) {
+    //            //do after successful upload
+    //            console.log(responseText);
+    //            showAlert("success","تم الاضافة بنجاح")
+    //            // $("#addUserForm").reset();;
+    //            $("#addUserForm").trigger("reset");
+    //            // alert(responseText);
+    //            // alert("success");
+    //        })
+    //    }
+    //});
+    //
+    //$("#upload").click(function (e) {
+    //    alert("Helllo");
+    //
+    //    myDZ.processQueue();
+    //})
+
 </script>

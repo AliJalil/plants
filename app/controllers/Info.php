@@ -152,6 +152,8 @@ class Info extends Controller
                 // Sanitize POST
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
+                print_r($_POST);
+
                 if (isset($_FILES['imgs']) == '') {
                     $Post_error = "50";
                     echo json_encode(array($Post_error));
@@ -178,11 +180,6 @@ class Info extends Controller
             } else {
                 // IF NOT A POST REQUEST
                 $Plant = $this->plantModel->getPlantById($pId);
-//                $data = [
-//                    'Plants' => $Plants,
-//                ];
-//                $this->publicFunc->styling("user-nav");
-                // Load View
                 $this->view('Info/update', $Plant);
             }
         } else {

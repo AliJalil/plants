@@ -106,13 +106,17 @@
     })
     var myDZ = new Dropzone("#dZUpload", {
         url: '<?php echo URLROOT . "/Info/add";?>',
+        acceptedFiles: ".jpeg,.jpg,.png,.gif",
         addRemoveLinks: true,
         autoProcessQueue: false,
         uploadMultiple: true,
         parallelUploads: 100,
-        maxFiles: 10,
+        maxFiles: 15, // Maximum Number of Files
+        maxFilesize: 8,// MB
         paramName: 'imgs',
         clickable: true,
+        dictRemoveFile: 'Remove',
+        dictFileTooBig: 'Image is bigger than 8MB',
         init: function () {
             this.on('sending', function (xhr, fd1, fd2) {
                 //append extra data here

@@ -67,9 +67,6 @@
                 "thousands": "",
                 // "loadingRecords": "جار التحميل ...",
                 "processing": "جار المعالجة...",
-
-
-
                 "zeroRecords": "لا توجد بيانات مطابقة للبحث",
                 "paginate":
                     {
