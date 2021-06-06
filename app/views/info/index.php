@@ -28,10 +28,13 @@
             <td><?php echo $plant->isActive ?> </td>
             <td>
                 <div style="margin-top: 5px">
-                    <button id="delete-volu-<?php echo $plant->pId ?>" title="حذف السجل الحالي"> <span class="glyphicon glyphicon-trash"></span></button>
+                    <button id="delete-volu-<?php echo $plant->pId ?>" title="حذف السجل الحالي"><span
+                                class="glyphicon glyphicon-trash"></span></button>
                 </div>
                 <div style="margin-top: 5px">
-                    <button onclick="window.location.assign('<?php echo URLROOT . "/Info/update/". $plant->pId;?>')"  id="edit-plant-<?php echo $plant->pId ?>" title="تعديل"> <span class="glyphicon glyphicon-pencil"></span></button>
+                    <button onclick="window.location.assign('<?php echo URLROOT . "/Info/update/" . $plant->pId; ?>')"
+                            id="edit-plant-<?php echo $plant->pId ?>" title="تعديل"><span
+                                class="glyphicon glyphicon-pencil"></span></button>
                 </div>
             </td>
         </tr>
@@ -82,9 +85,14 @@
             },
             buttons: [
                 {
+                    text: 'طباعة الباركود',
+                    action: function (e, dt, node, config) {
+                        window.open(window.location.assign('<?php echo URLROOT . "/Info/print";?>'), "_blank");
+                    }
+                }, {
                     text: 'اضافة جديد',
-                    action: function ( e, dt, node, config ) {
-                        window.open(window.location.assign('<?php echo URLROOT . "/Info/add";?>'),"_blank");
+                    action: function (e, dt, node, config) {
+                        window.open(window.location.assign('<?php echo URLROOT . "/Info/add";?>'), "_blank");
                     }
                 },
                 {

@@ -10,9 +10,9 @@ class Info extends Controller
 
     public function index()
     {
-        if (!$this->isLoggedIn()) {
-            redirect('Plants/login');
-        }
+//        if (!$this->isLoggedIn()) {
+//            redirect('users/login');
+//        }
         if (isset($_SESSION['user_id'])) {
             $Plants = $this->plantModel->getPlants();
 
@@ -24,77 +24,9 @@ class Info extends Controller
 
             $this->view('info/index', $data);
         } else {
-            redirect('info');
+            redirect('users/login');
         }
 
-    }
-
-    public function replaceImage()
-    {
-        if (isset($_SESSION['addUser']) || isset($_SESSION['editUser'])) {
-
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                // Sanitize POST
-                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-                if (isset($_FILES['img']) != '') {
-
-                    $filename = $_FILES['img']['tmp_name'];
-                    $size = getimagesize($filename);
-                    if ($size === false) {
-                        $Post_error = "50";
-                        echo json_encode(array($Post_error));
-                        die();
-                    }
-                    if ($size[0] > 6000 || $size[1] > 6000) {
-                        $Post_error = "50";
-                        echo json_encode(array($Post_error));
-                        die();
-                    }
-                    if (!$img = @imagecreatefromstring(file_get_contents($filename))) {
-                        $Post_error = "50";
-                        echo json_encode(array($Post_error));
-                        die();
-                    }
-                    $this->plantModel->setImgName($_FILES['img']['tmp_name'], $_FILES['img']['name']);
-                }
-
-                $data = [
-                    'id' => trim($_POST['id'])
-                ];
-
-                if ($this->plantModel->replaceImg($data)) {
-                    $Post_error = "succ";
-                    echo json_encode(array($Post_error));
-                    die();
-
-                } else {
-                    $Post_error = "err";
-                    echo json_encode(array($Post_error));
-                    die();
-
-                }
-
-
-            } else {
-                // IF NOT A POST REQUEST
-
-                $Plants = $this->plantModel->getPlants();
-
-                $cities = $this->cityModel->getJsonCities();
-
-                $data = [
-                    'Plants' => $Plants,
-
-                    'cities' => $cities
-                ];
-
-
-                // Load View
-                $this->view('Plants', $data);
-            }
-        } else {
-            redirect("Plants");
-        }
     }
 
     public function add()
@@ -188,6 +120,91 @@ class Info extends Controller
 
     }
 
+    public function print()
+    {
+
+        if (isset($_SESSION['user_id'])) {
+            $Plants = $this->plantModel->getPlants();
+
+            $data = [
+                'Plants' => $Plants,
+            ];
+
+            $this->view('info/print', $data);
+        } else {
+            redirect('users/login');
+        }
+
+    }
+
+    public function replaceImage()
+    {
+        if (isset($_SESSION['addUser']) || isset($_SESSION['editUser'])) {
+
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                // Sanitize POST
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                if (isset($_FILES['img']) != '') {
+
+                    $filename = $_FILES['img']['tmp_name'];
+                    $size = getimagesize($filename);
+                    if ($size === false) {
+                        $Post_error = "50";
+                        echo json_encode(array($Post_error));
+                        die();
+                    }
+                    if ($size[0] > 6000 || $size[1] > 6000) {
+                        $Post_error = "50";
+                        echo json_encode(array($Post_error));
+                        die();
+                    }
+                    if (!$img = @imagecreatefromstring(file_get_contents($filename))) {
+                        $Post_error = "50";
+                        echo json_encode(array($Post_error));
+                        die();
+                    }
+                    $this->plantModel->setImgName($_FILES['img']['tmp_name'], $_FILES['img']['name']);
+                }
+
+                $data = [
+                    'id' => trim($_POST['id'])
+                ];
+
+                if ($this->plantModel->replaceImg($data)) {
+                    $Post_error = "succ";
+                    echo json_encode(array($Post_error));
+                    die();
+
+                } else {
+                    $Post_error = "err";
+                    echo json_encode(array($Post_error));
+                    die();
+
+                }
+
+
+            } else {
+                // IF NOT A POST REQUEST
+
+                $Plants = $this->plantModel->getPlants();
+
+                $cities = $this->cityModel->getJsonCities();
+
+                $data = [
+                    'Plants' => $Plants,
+
+                    'cities' => $cities
+                ];
+
+
+                // Load View
+                $this->view('Plants', $data);
+            }
+        } else {
+            redirect("Plants");
+        }
+    }
+
 
     // Check Logged In
     public function isLoggedIn()
@@ -198,8 +215,6 @@ class Info extends Controller
             return false;
         }
     }
-
-
 
     public function edit()
     {
