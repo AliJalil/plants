@@ -83,7 +83,7 @@
         <!-- Indicators -->
         <ol class="carousel-indicators">
             <li data-target="#carousel-example-generic"
-                data-slide-to="0"
+                data-slide-to="0"   
                 class="active"></li>
             <li data-target="#carousel-example-generic" data-slide-to="1"></li>
             <li data-target="#carousel-example-generic" data-slide-to="2"></li>
@@ -135,7 +135,7 @@
         <div class="col-sm-6 col-md-4">
             <div class="thumbnail">
 
-                <img id="img<?php echo $pId ?>" class="img-circle"
+                <img id="img<?php echo $pId ?>"
                      src="<?php echo checkImg($plant->mainImg) ?>">
 
                 <div class="caption">

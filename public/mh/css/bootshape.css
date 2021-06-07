@@ -27,3 +27,48 @@ body {
     margin-top: 40px;
     padding: 40px 0;
 }
+
+.card{
+    background-color: rgb(243, 243, 243);
+    font-family: 'Tajawal', sans-serif;
+  }
+  .px2{
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    margin-bottom: 10px;
+  }
+  .card-body{
+    margin: 10px;
+  }
+  .preview-thumbnail{
+    cursor: pointer;
+  
+  }
+  
+  /* card print */
+  
+  #targets{
+    display: none;
+  }
+  .imgcard{
+  width:200px; padding-top:40px
+  }
+  .carde{
+    border:2px solid black;
+    background:aliceblue;
+    display:flex;
+    justify-content: space-around;
+  }
+  .imag{
+    width:200px;
+  }
+  .rowe{
+    display:flex;
+    justify-content:space-evenly;
+    
+  }
+  .card-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }

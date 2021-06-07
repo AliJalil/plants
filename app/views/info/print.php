@@ -36,12 +36,12 @@
 
 <div class="container" id="print">
 
+
+        <div class="row align-items-start">
     <?php
     foreach ($data['Plants'] as $plant) :
         ?>
-
-        <div class="row align-items-start">
-            <div class="col">
+            <div class="col-md-6">
                 <div class="carde">
                     <div class="card-avatar">
                         <div class='imag' id="qrcode-<?php echo $plant->pId ?>"></div>
@@ -51,17 +51,17 @@
                             <h3 class="card-title"><b> <?php echo $plant->eName ?> </b></h3>
                             <h3 class="card-title"><b> <?php echo $plant->name ?>  </b></h3>
                         </div>
-                        <button type="button" class="btn btn-primary"><?php echo $plant->type ?></button>
+                        <div class="btn btn-primary"><?php echo $plant->type ?></div>
                     </div>
                 </div>
             </div>
+    <?php
+    endforeach;
+    ?>
         </div>
         <script>
             updateQRCode("<?php echo URLROOT . "/main/details/" . $plant->pId ?>", "qrcode-<?php echo $plant->pId ?>");
         </script>
-    <?php
-    endforeach;
-    ?>
 </div>
 <button type="button" onclick="genpdf()" id="printbtn" class="btn btn-warning">
     Print
