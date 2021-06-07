@@ -58,6 +58,7 @@ body {
     background:aliceblue;
     display:flex;
     justify-content: space-around;
+    margin: 2px;
   }
   .imag{
     width:200px;
