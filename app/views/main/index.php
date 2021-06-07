@@ -64,7 +64,7 @@
 
                     <a style="padding: 0;" target="_blank" href="https://alkafeel.edu.iq/"><img
                                 style="width: 18rem;"
-                                src="https://alkafeel.edu.iq/tables/public/images/statics/logo.png"
+                                src="<?php echo URLROOT; ?>/public/images/statics/logo.png"
                                 alt="logo"/></a>
                 </li>
             </ul>

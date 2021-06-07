@@ -87,6 +87,60 @@ class Plant
     }
 
 
+    public function editPlant($data)
+    {
+        $newNames = [];
+
+        foreach ($this->imgName as $img) {
+            $path_parts = pathinfo($img);
+            $ext = $path_parts['extension'];
+            $newNames[] = basename(rand() . "_" . time() . "." . $ext);
+        }
+//
+//        $path_parts = pathinfo($this->imgName[0]);
+//        $ext = $path_parts['extension'];
+//        $newName = "";
+//
+//        if ($this->tempImgName != "") {
+//            $newName = basename(rand() . "_" . time() . "." . $ext);
+//        } else {
+//            $newName = URLROOT . "/images/statics/noimageicon.png";
+//        }
+
+
+        $this->db->query('INSERT INTO
+              `planttb`( `name`,eName, `det`, `mainImg`,imgs,`type`)
+               VALUES (:name, :eName, :det,:mainImg,:imgs,:type)');
+
+        // Bind Values
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':eName', $data['ename']);
+        $this->db->bind(':det', $data['det']);
+        $this->db->bind(':imgs', json_encode(array_slice($newNames, 1, count($newNames))));
+        $this->db->bind(':mainImg', $newNames[0]);
+        $this->db->bind(':type', $data['type']);
+
+
+        //Execute
+        if ($this->db->execute()) {
+            $upOne = realpath(dirname(__FILE__) . '/../..');
+            $target = $upOne . "/public/images/";
+            for ($i = 0; $i < count($this->tempImgName); $i++) {
+                $finalPathName = $target . $newNames[$i];
+                // Writes the photo to the server
+                if ($this->tempImgName != "") {
+                    move_uploaded_file($this->tempImgName[$i], $finalPathName);
+//                    return true;
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
     // Find User By ID
     public function getPlantById($id)
     {

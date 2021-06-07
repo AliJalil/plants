@@ -10,28 +10,20 @@ class Info extends Controller
 
     public function index()
     {
-//        if (!$this->isLoggedIn()) {
-//            redirect('users/login');
-//        }
         if (isset($_SESSION['user_id'])) {
             $Plants = $this->plantModel->getPlants();
 
             $data = [
                 'Plants' => $Plants,
             ];
-
-//            $this->publicFunc->styling("user-nav");
-
             $this->view('info/index', $data);
         } else {
             redirect('users/login');
         }
-
     }
 
     public function add()
     {
-
         if (isset($_SESSION['user_id'])) {
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Sanitize POST
@@ -66,7 +58,6 @@ class Info extends Controller
                 $data = [
                     'Plants' => $Plants,
                 ];
-//                $this->publicFunc->styling("user-nav");
                 // Load View
                 $this->view('Info/add', $data);
             }
@@ -84,7 +75,7 @@ class Info extends Controller
                 // Sanitize POST
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-                print_r($_POST);
+//                print_r($_POST);
 
                 if (isset($_FILES['imgs']) == '') {
                     $Post_error = "50";
@@ -120,21 +111,19 @@ class Info extends Controller
 
     }
 
-    public function print()
+    public function print($pId = -1)
     {
-
         if (isset($_SESSION['user_id'])) {
-            $Plants = $this->plantModel->getPlants();
-
-            $data = [
-                'Plants' => $Plants,
-            ];
-
+            if ($pId == -1) {
+                $Plants = $this->plantModel->getPlants();
+            } else {
+                $Plants =  [$this->plantModel->getPlantById($pId)];
+            }
+            $data = ['Plants' => $Plants,];
             $this->view('info/print', $data);
         } else {
             redirect('users/login');
         }
-
     }
 
     public function replaceImage()
@@ -221,39 +210,32 @@ class Info extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 //            if (isset($_SESSION['editUser'])) {
 
-                // Sanitize POST
-                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+            // Sanitize POST
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
 
-                $params = $_POST;
-                if (isset($params['name']) && isset($params['value']) && isset($params['pk'])) {
+            $params = $_POST;
+            if (isset($params['name']) && isset($params['value']) && isset($params['pk'])) {
 
-                    if ($params['name'] == 'name' || $params['name'] == 'userName' || $params['name'] == 'password'
-                        || $params['name'] == 'centerId' || $params['name'] == 'phoneNo' || $params['name'] == 'city'
-                        || $params['name'] == 'age' || $params['name'] == 'identifierName' || $params['name'] == 'identifierPhone'
-                        || $params['name'] == 'isActive' || $params['name'] == 'isDeleted'
-                        || $params['name'] == 'uImgDeleted') {
+                if ($params['name'] == 'name' || $params['name'] == 'userName' || $params['name'] == 'password'
+                    || $params['name'] == 'centerId' || $params['name'] == 'phoneNo' || $params['name'] == 'city'
+                    || $params['name'] == 'age' || $params['name'] == 'identifierName' || $params['name'] == 'identifierPhone'
+                    || $params['name'] == 'isActive' || $params['name'] == 'isDeleted'
+                    || $params['name'] == 'uImgDeleted') {
 
-                        $data = [
-                            'name' => trim($params["name"]),
-                            'value' => trim($params["value"]),
-                            'pk' => trim($params["pk"])
-                        ];
+                    $data = [
+                        'name' => trim($params["name"]),
+                        'value' => trim($params["value"]),
+                        'pk' => trim($params["pk"])
+                    ];
 
-                        if (trim($params["name"]) != 'isActive') {
-                            if (empty($data['name']) || empty($data['value']) || empty($data['pk'])) {
-                                $Post_error = "err";
-                                echo json_encode(array($Post_error));
-                                die();
-                            }
+                    if (trim($params["name"]) != 'isActive') {
+                        if (empty($data['name']) || empty($data['value']) || empty($data['pk'])) {
+                            $Post_error = "err";
+                            echo json_encode(array($Post_error));
+                            die();
                         }
                     }
-
-//                } else {
-//                    $Post_error = "err";
-//                    echo json_encode(array($Post_error));
-//                    die();
-//                }
-
+                }
 
                 if ($this->plantModel->updatePlant($data)) {
                     $Post_error = "succ";

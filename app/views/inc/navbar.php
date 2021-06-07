@@ -29,149 +29,6 @@
 
             <ul class="nav navbar-nav navbar-right">
 
-                <?php if (isset($_SESSION['addPlant'])
-                    || isset($_SESSION['editPlant'])
-                    || isset($_SESSION['deletePlant'])) : ?>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle lost-nav" data-toggle="dropdown"
-                           href="<?php echo URLROOT; ?>/Points">الاليات
-                            <span class="Plantet"></span></a>
-
-                        <ul class="dropdown-menu">
-                            <?php if (isset($_SESSION['editPlant'])
-                                || isset($_SESSION['deletePlant'])) : ?>
-                                <li class=""><a href="<?php echo URLROOT; ?>/Plants/index">
-                                        <span class="glyphicon glyphicon-list-alt"></span>عرض الاليات الفعالة</a></li>
-                            <?php endif; ?>
-                            <?php if (isset($_SESSION['editPlant'])
-                                || isset($_SESSION['deletePlant'])) : ?>
-                                <li class=""><a href="<?php echo URLROOT; ?>/Plants/index/1">
-                                        <span class="glyphicon glyphicon-list-alt"></span>عرض المنتهية الصلاحية</a></li>
-                            <?php endif; ?>
-                            <?php if (isset($_SESSION['editPlant'])
-                                || isset($_SESSION['deletePlant'])) : ?>
-                                <li class=""><a href="<?php echo URLROOT; ?>/Plants/refusedPlants">
-                                        <span class="glyphicon glyphicon-list-alt"></span>عرض المرفوضة</a></li>
-                            <?php endif; ?>
-                            <?php if (isset($_SESSION['addPlant'])) : ?>
-                                <li class=""><a href="<?php echo URLROOT; ?>/Plants/addPlant">
-                                        <span class="glyphicon glyphicon-plus"></span> اضافة الية جديدة</a></li>
-                            <?php endif; ?>
-                        </ul>
-                    </li>
-                <?php endif; ?>
-
-                <?php if (isset($_SESSION['addReport'])
-                    || isset($_SESSION['editReport'])
-                    || isset($_SESSION['deleteReport'])) : ?>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle income-report-nav" data-toggle="dropdown"
-                           href="<?php echo URLROOT; ?>/Points">المواقف الواردة
-                            <span class="Plantet"></span></a>
-
-                        <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-                            <?php if (isset($_SESSION['editReport'])
-                                || isset($_SESSION['deleteReport'])) : ?>
-                                <li class=""><a href="<?php echo URLROOT; ?>/Plants/getReports/1/0">
-                                        <span class="glyphicon glyphicon-list-alt"></span>عرض المواقف الواردة</a></li>
-                            <?php endif; ?>
-
-                            <?php if (isset($_SESSION['editReport'])
-                                || isset($_SESSION['deleteReport'])) : ?>
-                                <li class="dropdown-submenu">
-                                    <a tabindex="-1" href="#">دخول هذا اليوم</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a tabindex="-1" href="<?php echo URLROOT; ?>/Plants/index/2">الدائمة</a></li>
-                                        <li><a href="<?php echo URLROOT; ?>/Plants/getReports/1/1">الواردة</a></li>
-                                    </ul>
-                                </li>
-
-                            <?php endif; ?>
-                        </ul>
-
-                    </li>
-                <?php endif; ?>
-
-                <?php if (isset($_SESSION['addPoint'])
-                    || isset($_SESSION['editPoint'])
-                    || isset($_SESSION['deletePoint'])) : ?>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle point-nav" data-toggle="dropdown"
-                           href="<?php echo URLROOT; ?>/points">المراكز والنقاط
-                            <span class="Plantet"></span></a>
-                        <ul class="dropdown-menu">
-                            <?php if (isset($_SESSION['editPoint'])
-                                || isset($_SESSION['deletePoint'])) : ?>
-                                <li><a href="<?php echo URLROOT; ?>/points/index"><span
-                                                class="glyphicon glyphicon-list-alt"></span>عرض الكل</a></li>
-                            <?php endif; ?>
-
-                            <?php if (isset($_SESSION['addPoint'])) : ?>
-                                <li><a href="<?php echo URLROOT; ?>/points/add"><span
-                                                class="glyphicon glyphicon-plus"></span>اضافة جديدة</a></li>
-                            <?php endif; ?>
-                        </ul>
-                    </li>
-                <?php endif; ?>
-
-                <?php if (isset($_SESSION['addUser'])
-                    || isset($_SESSION['editUser'])
-                    || isset($_SESSION['deleteUser'])
-                    || isset($_SESSION['addUserPoint'])
-                    || isset($_SESSION['editUserPoint'])
-                    || isset($_SESSION['deleteUserPoint'])) : ?>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle user-nav" data-toggle="dropdown"
-                           href="<?php echo URLROOT; ?>/points">المستخدمين
-                            <span class="Plantet"></span></a>
-                        <ul class="dropdown-menu">
-                            <?php if (isset($_SESSION['editUser'])
-                                || isset($_SESSION['deleteUser'])) : ?>
-                                <li><a href="<?php echo URLROOT; ?>/users/index"><span
-                                                class="glyphicon glyphicon-list-alt"></span>
-                                        عرض المستخدمين المدراء</a></li>
-                            <?php endif; ?>
-
-                            <?php if (isset($_SESSION['editUserPoint'])
-                                || isset($_SESSION['deleteUserPoint'])) : ?>
-                                <li><a href="<?php echo URLROOT; ?>/users/userPoint"><span
-                                                class="glyphicon glyphicon-list-alt"></span>
-                                        عرض مستخدميّ النقاط</a></li>
-                            <?php endif; ?>
-
-                            <?php if (isset($_SESSION['addUser'])) : ?>
-                                <li><a href="<?php echo URLROOT; ?>/users/addUser"><span
-                                                class="glyphicon glyphicon-plus"></span>اضافة مستخدم مدير</a></li>
-                            <?php endif; ?>
-
-                            <?php if (isset($_SESSION['addUserPoint'])) : ?>
-                                <li><a href="<?php echo URLROOT; ?>/users/addUserPoint"><span
-                                                class="glyphicon glyphicon-plus"></span>اضافة مستخدم نقطة</a></li>
-                            <?php endif; ?>
-                        </ul>
-
-                    </li>
-                <?php endif; ?>
-
-                <?php if (isset($_SESSION['addPlant'])
-                    || isset($_SESSION['editPlant'])
-                    || isset($_SESSION['deletePlant'])): ?>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle event-nav" data-toggle="dropdown"
-                           href="<?php echo URLROOT; ?>/points">الاحداث
-                            <span class="Plantet"></span></a>
-                        <ul class="dropdown-menu">
-                            <?php if (isset($_SESSION['editPlant'])
-                                || isset($_SESSION['deletePlant'])) : ?>
-                                <li><a href="<?php echo URLROOT; ?>/events/index"><span
-                                                class="glyphicon glyphicon-list-alt"></span>
-                                        عرض الاحداث </a></li>
-                            <?php endif; ?>
-
-                        </ul>
-
-                    </li>
-                <?php endif; ?>
 
                 <?php if (isset($_SESSION['user_id'])) : ?>
                     <li>
@@ -185,32 +42,13 @@
                                      class="img-circle" style="margin:20px;  width:60px; height:60px">
                             </li>
 
-<!--                            <li style="margin:10px" role="presentation">--><?php //echo trim($_SESSION['Uname']) ?><!--</li>-->
-<!--                            <li role="presentation">-->
-<!--                                <div class="user-info-div" style="background: #5c5c5c; ">-->
-<!--                                    --><?php //echo $_SESSION['point_name'] ?><!--</div>-->
-<!--                            </li>-->
-<!--                            <li role="presentation">-->
-<!--                                <div class="user-info-div" style="background: #4f4f4f;">-->
-<!--                                    --><?php //echo $_SESSION['cPhone'] ?>
-<!--                                </div>-->
-<!--                            </li>-->
-
+                            <li style="margin:10px" role="presentation"><?php echo trim($_SESSION['Uname']) ?></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1"
                                                        href="<?php echo URLROOT; ?>/users/logout">
                                     <span class="glyphicon glyphicon-log-out"></span>
                                     تسجيل الخروج</a></li>
                         </ul>
                     </li>
-
-                    <?php if (isset($_SESSION['addUser'])
-                        && isset($_SESSION['editUser'])
-                        && isset($_SESSION['deleteUser'])) : ?>
-                        <li>
-                            <a href="<?php echo URLROOT; ?>/manages">
-                                <span> &nbsp &nbsp &nbsp</span></a>
-                        </li>
-                    <?php endif; ?>
                 <?php else : ?>
                     <li><a href="<?php echo URLROOT ?>"/users/login"><span
                                 class="glyphicon glyphicon-log-in"></span> تسجيل الدخول</a></li>

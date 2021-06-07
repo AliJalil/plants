@@ -33,8 +33,11 @@
                 </div>
                 <div style="margin-top: 5px">
                     <button onclick="window.location.assign('<?php echo URLROOT . "/Info/update/" . $plant->pId; ?>')"
-                            id="edit-plant-<?php echo $plant->pId ?>" title="تعديل"><span
-                                class="glyphicon glyphicon-pencil"></span></button>
+                            id="edit-plant-<?php echo $plant->pId ?>" title="تعديل"><span class="glyphicon glyphicon-pencil"></span></button>
+                </div>
+                <div style="margin-top: 5px">
+                    <button onclick="window.location.assign('<?php echo URLROOT . "/Info/print/" . $plant->pId; ?>')"
+                            id="edit-plant-<?php echo $plant->pId ?>" title="طباعة"><span class="glyphicon glyphicon-print"></span></button>
                 </div>
             </td>
         </tr>

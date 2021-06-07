@@ -10,7 +10,6 @@
 
 
     <script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
-
     <script type="text/javascript" src="<?php echo URLROOT . "/public/js/DataTables/jQuery-1.12.4/jquery-1.12.4.min.js" ?>"></script>
 
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.4.min.js"></script>

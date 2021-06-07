@@ -1,9 +1,5 @@
- var titles = [{value: "استاذ", text: 'Prof.  | استاذ'},
-    {value: "استاذ مساعد", text: 'Assoc. Prof. | استاذ مساعد'},
-    {value: "مدرس", text: 'Lecturer | مدرس'},
-    {value: "مدرس مساعد", text: 'Assoc. Lecturer | مدرس مساعد'},
-    {value: "سيد", text: 'Mr. | سيد'},
-    {value:"سيدة", text: 'Mrs. | سيدة'}
+ var titles = [{value: "زينة", text: 'زينة'},
+    {value: "طبي", text: 'طبي'},
 ];
 
  var certs = [{value: "دكتوراه", text: 'دكتوراه'},
@@ -23,8 +19,12 @@
     {value: 8, text: 'السياحة الدينية'}
 ];
 
+ var isActive = [{value: 1, text: 'نعم'},
+     {value: 2, text: 'لا'},
+ ];
 
-function changeCredintals(id, name,userName, ajaxUrl) {
+
+ function changeCredintals(id, name,userName, ajaxUrl) {
 
     Swal.fire({
         title: "<b> تغيير كلمة المرور</b>",

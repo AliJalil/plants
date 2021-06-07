@@ -40,11 +40,9 @@
                 <li>
 
                     <a style="padding: 0;" href="https://alkafeel.edu.iq/"
-                    ><img
-                                style="width: 18rem;"
-                                src="https://alkafeel.edu.iq/tables/public/images/statics/logo.png"
-                                alt="logo "
-                        /></a>
+                    ><img style="width: 18rem;"
+                                src="<?php echo URLROOT; ?>/public/images/statics/logo.png"
+                                alt="logo"/></a>
                 </li>
             </ul>
         </nav>
@@ -61,10 +59,11 @@ $imgs = json_decode($currentPlant->imgs); ?>
                 <div class="preview col-md-6">
 
                     <div class="preview-pic tab-content">
-                        <div class="tab-pane active" id="pic-1"><img
+                        <div class="tab-pane active" id="pic-1"><img  id="main"
                                     src="<?php echo  checkImg($currentPlant->mainImg)  ?>"/></div>
 
                     </div>
+
                     <ul class="preview-thumbnail nav nav-tabs">
                         <?php
                         $i = 0;
@@ -104,5 +103,9 @@ $imgs = json_decode($currentPlant->imgs); ?>
         Planets. All Rights Reserved.
     </p>
 </div>
+
+<script type="text/javascript">
+    const change = src => {document.getElementById('main').src = src}
+</script>
 </body>
 </html>

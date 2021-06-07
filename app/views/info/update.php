@@ -151,11 +151,6 @@
             //mockFile.previewElement.classList.add('dz-complete');
             <?php endforeach; ?>
 
-
-
-            alert($('#dZUpload').get(0).dropzone);
-
-
             this.on('maxfilesexceeded', function (file) {
                 this.removeAllFiles();
                 this.addFile(file);
