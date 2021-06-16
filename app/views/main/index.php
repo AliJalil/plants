@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!-- Bootstrap -->
     <link href="<?php echo URLROOT . "/public/mh/css/bootstrap.css" ?>" rel="stylesheet"/>
-
+<!-- tab icon -->
+<link rel="shortcut icon" type="image/x-icon" href="<?php echo URLROOT . "/public/images/tabicon.svg" ?>" />
     <!--Google Fonts-->
     <link href="http://fonts.googleapis.com/css?family=Duru+Sans|Actor" rel="stylesheet" type="text/css"/>
 
@@ -18,11 +19,11 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 
+
+    <![endif]-->
   <script type="text/javascript" src="<?php echo URLROOT . "/public/mh/js/bootstrap.min.js" ?>"></script>
   <script type="text/javascript" src="<?php echo URLROOT . "/public/mh/js/bootshape.js" ?>"></script>
   <script type="text/javascript" src="<?php echo URLROOT . "/public/mh/js/jquery.js" ?>"></script>
-
-    <![endif]-->
 </head>
 <head>
     <title>Zoo Planet</title>
@@ -35,17 +36,11 @@
 
     <!--Bootshape-->
     <link href="<?php echo URLROOT . "/public/mh/css/bootshape.css" ?>" rel="stylesheet"/>
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-
+    
+  <script type="text/javascript" src="<?php echo URLROOT . "/public/mh/js/jquery.js" ?>"></script>
   <script type="text/javascript" src="<?php echo URLROOT . "/public/mh/js/bootstrap.min.js" ?>"></script>
   <script type="text/javascript" src="<?php echo URLROOT . "/public/mh/js/bootshape.js" ?>"></script>
-  <script type="text/javascript" src="<?php echo URLROOT . "/public/mh/js/jquery.js" ?>"></script>
-
-    <![endif]-->
+  
 </head>
 <body>
 <!-- Navigation bar -->
@@ -133,7 +128,7 @@
     <?php foreach ($data['Plants'] as $plant) :
         $pId = $plant->pId; ?>
         <div class="col-sm-6 col-md-4">
-            <div class="thumbnail">
+            <div class="thumbnail cardbg">
 
                 <img id="img<?php echo $pId ?>"
                      src="<?php echo checkImg($plant->mainImg) ?>">

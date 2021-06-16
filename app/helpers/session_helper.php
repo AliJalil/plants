@@ -33,7 +33,7 @@ function checkImg($source, $noImgName = "noImage.png")
     $upOne = realpath(dirname(__FILE__) . '/../..');
     $target = $upOne . "\public\images\\";
     //print_r($target);
-    print_r( URLROOT . "/public/images/" . $source);
+    //print_r( URLROOT . "/public/images/" . $source);
     //print_r($target.$source);
     if (isset($source) && !empty($source)) {
         if (file_exists($target . $source)) {
