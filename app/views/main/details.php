@@ -31,7 +31,7 @@
         <a href="#">
             <div class="navbar-header ">
 
-                <a class="navbar-brand" href="index.php" style="color: aliceblue;">
+                <a class="navbar-brand" href="<?php echo URLROOT. "/main/index" ?>" style="color: aliceblue;">
                     حدائق <span class="blue">جامعة الكفيل</span></a>
             </div>
         </a>
@@ -105,7 +105,9 @@ $imgs = json_decode($currentPlant->imgs); ?>
 </div>
 
 <script type="text/javascript">
-    const change = src => {document.getElementById('main').src = src}
+  const change = src => {
+        document.getElementById('main').src = src;
+      }
 </script>
 </body>
 </html>

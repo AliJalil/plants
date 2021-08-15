@@ -10,6 +10,6 @@ define("DB_NAME", "plants_db");
 define('APPROOT', dirname(dirname(__FILE__)));
 
 // URL Root
-define('URLROOT', 'http://localhost:8080/plants');
+define('URLROOT', 'http://localhost/plants');
 // Site Name
 define('SITENAME', 'Alkafeel Plants');
