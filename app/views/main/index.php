@@ -95,7 +95,7 @@
 
 <main>
 <div class='bg-img'>
-<div style='background: rgba(0, 0, 0, 0.5);'>
+<div style='background: rgba(0, 0, 0, 0.35);'>
 
 
     <section class="py-5 text-center container  ">
@@ -113,6 +113,7 @@
         </div>
     </section>
 </div> </div>
+
     
     <div class="album py-5 bg-light">
         
@@ -133,9 +134,12 @@
                             <div class="card-body">
                                 <h5 class="card-title text-center"  style='color:#01A9E8'><?php echo $plant->name; ?></h5>
                                 <hr>
-                                <p class="card-text " style='text-align: justify'>
-                                    <?php echo $plant->det; ?>
-                                </p>
+                                <div class='overflowed'>
+
+                                    <p class="card-text  " >
+                                        <?php echo $plant->det; ?>
+                                    </p>
+                                </div>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <a href="<?php echo URLROOT . "/main/details/" . $pId ?>" role="button" class="btn btn-sm btn-outline-primary">عرض

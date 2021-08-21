@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html >
 <head>
-    <title>Zoo Planet</title>
+<title>حدائق جامعة الكفيل</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!-- Bootstrap -->
     <link href="<?php echo URLROOT . "/public/mh/css/bootstrap.rtl.min.css" ?>" rel="stylesheet">
@@ -129,8 +130,8 @@ $imgs = json_decode($currentPlant->imgs); ?>
                     <h3 class="product-title text-center"><?php echo $currentPlant->name; ?> </h3>
                     <h3 class="product-title text-center" style='color:#01A9E8' > <?php echo $currentPlant->eName; ?></h3>
 <hr />
-<p style='text-align: right;'
-                    <p class="product-description " style='text-align: justify' >
+
+                    <p class="product-description " style='text-align: justify ; direction: rtl;' >
                         <?php echo $currentPlant->det; ?>
                     </p> </p>   
                     <div class="type">

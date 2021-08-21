@@ -102,10 +102,34 @@ body {
    .statisctic{
      display: flex;
      justify-content: space-evenly;
+     flex-wrap: wrap;
    }
 .far{
   height: 150px;
 }
+
+
+.textJustify{
+  text-align: justify;
+  direction: rtl;
+  white-space: nowrap; 
+  width: 150px; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+
+.overflowed{
+  padding-bottom: 2em;
+}
+
+.overflowed > p {
+  text-align: justify;
+  direction: rtl;
+  height: 10em;
+  overflow: hidden;
+
+}
+
 
 .bg-img{
   background: url('https://alkafeel.edu.iq/library/img/cover.jpg') center no-repeat;
