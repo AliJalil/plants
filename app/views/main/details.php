@@ -4,12 +4,14 @@
     <title>Zoo Planet</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!-- Bootstrap -->
-    <link href="<?php echo URLROOT . "/public/mh/css/bootstrap.css" ?>" rel="stylesheet"/>
+    <link href="<?php echo URLROOT . "/public/mh/css/bootstrap.rtl.min.css" ?>" rel="stylesheet">
+
 
     <!--Google Fonts-->
     <link href="http://fonts.googleapis.com/css?family=Duru+Sans|Actor" rel="stylesheet" type="text/css"/>
 
     <!--Bootshape-->
+
     <link href="<?php echo URLROOT . "/public/mh/css/details.css" ?>" rel="stylesheet"/>
     <link href="<?php echo URLROOT . "/public/mh/css/bootshape.css" ?>" rel="stylesheet"/>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -24,31 +26,36 @@
     <script type="text/javascript" src="<?php echo URLROOT . "/public/mh/js/bootshape.js" ?>"></script>
     <script type="text/javascript" src="<?php echo URLROOT . "/public/mh/js/jquery.js" ?>"></script>
 </head>
+<style>
+.imgcrop{
+width: 180px;
+  height: 140px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border-radius: 4%;
+
+    }
+</style>
 <body>
 <!-- Navigation bar -->
-<div class="navbar navbar-default navbar-fixed-top" style="background: #130F40;" role="navigation">
-    <div class="container">
-        <a href="#">
-            <div class="navbar-header ">
-
-                <a class="navbar-brand" href="<?php echo URLROOT. "/main/index" ?>" style="color: aliceblue;">
-                    حدائق <span class="blue">جامعة الكفيل</span></a>
-            </div>
-        </a>
-        <nav role="navigation" class="collapse navbar-collapse navbar-right">
-            <ul class="navbar-nav nav">
-                <li>
-
-                    <a style="padding: 0;" href="https://alkafeel.edu.iq/"
-                    ><img style="width: 18rem;"
-                                src="<?php echo URLROOT; ?>/public/images/statics/logo.png"
-                                alt="logo"/></a>
-                </li>
-            </ul>
-        </nav>
+<header class="sticky-top">
+ 
     </div>
-</div>
-
+    <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a target="_blank"
+               href="https://alkafeel.edu.iq/" style="padding: 0;" class="navbar-brand d-flex align-items-center">
+                <img
+                        style="width: 40%"
+                        src="https://alkafeel.edu.iq/tables/public/images/statics/logo.png"
+                        alt="logo "
+                />
+            </a>
+            <a href="<?php echo URLROOT . "/index.php" ?>" style='color:#01A9E8; font-size:2rem; text-decoration:none'><b> حدائق الجامعة </b></a>
+            
+        </div>
+    </div>
+</header>
 <?php
 $currentPlant = $data;
 $imgs = json_decode($currentPlant->imgs); ?>
@@ -60,7 +67,10 @@ $imgs = json_decode($currentPlant->imgs); ?>
 
                     <div class="preview-pic tab-content">
                         <div class="tab-pane active" id="pic-1"><img  id="main"
-                                    src="<?php echo  checkImg($currentPlant->mainImg)  ?>"/></div>
+                                style='
+    border-radius: 4%;
+                                
+                                '    src="<?php echo  checkImg($currentPlant->mainImg)  ?>"/></div>
 
                     </div>
 
@@ -69,18 +79,19 @@ $imgs = json_decode($currentPlant->imgs); ?>
                         $i = 0;
                         foreach ($imgs as $img) :?>
                             <li><a data-target="#pic-<?php echo $i ?>" data-toggle="tab"><img
-                                            src=" <?php echo checkImg($img)  ?>"/></a></li>
+                                          class='imgcrop'  src=" <?php echo checkImg($img)  ?>"/></a></li>
                         <?php endforeach; ?>
                     </ul>
 
                 </div>
                 <div class="details col-md-6">
-                    <h3 class="product-title"><?php echo $currentPlant->name; ?> </h3>
-                    <h3 class="product-title"> <?php echo $currentPlant->eName; ?></h3>
-
-                    <p class="product-description text-end">
+                    <h3 class="product-title text-center"><?php echo $currentPlant->name; ?> </h3>
+                    <h3 class="product-title text-center"  > <?php echo $currentPlant->eName; ?></h3>
+<hr />
+<p style='text-align: right;'
+                    <p class="product-description " style='text-align: justify' >
                         <?php echo $currentPlant->det; ?>
-                    </p>
+                    </p> </p>   
                     <div class="type">
                         <h4><b> : النوع </b></h4>
                         <span class="badge bg-blue"><?php echo $currentPlant->type; ?></span>
@@ -92,18 +103,49 @@ $imgs = json_decode($currentPlant->imgs); ?>
     </div>
 </div>
 <!-- copyright -->
-<div class="footer text-center">
-    <p>
-        &copy; 2021
-        <b
-        ><a class="blue" target="_blank" href="https://alkafeel.edu.iq/">
-                Alkafeel University
-            </a></b
-        >
-        Planets. All Rights Reserved.
-    </p>
-</div>
+<footer class="text-muted py-5">
+    <div class="container  footer">
+   
+        <div class="text-center mb-1">
 
+  <a href="https://www.facebook.com/alkafeel.edu.iq">
+    <img  class="fa" src=" <?php echo URLROOT . "/public/images/icon/facebook.svg" ?> " alt="facebook logo"
+  /></a>
+
+
+
+  
+  <a href="https://instagram.com/alkafeeleduiq">
+    <img
+      class="fa"
+      src="<?php echo URLROOT . "/public/images/icon/instagram.svg" ?>"
+      alt="instagram logo"
+    />
+  </a>
+
+
+      <a href="https://twitter.com/alkafeeleduiq">
+          <img
+            class="fa"
+             src="<?php echo URLROOT . "/public/images/icon/twitter.svg" ?>"
+            alt="twitter logo"
+          />
+        </a>
+      
+    
+    
+    
+      <a href="https://www.youtube.com/user/humanitiescollege">
+        <img
+          class="fa"
+          src="<?php echo URLROOT . "/public/images/icon/youtube.svg" ?>"
+          alt="youtube logo"
+        />
+      </a>
+                </div>
+      
+    </div>
+</footer>
 <script type="text/javascript">
   const change = src => {
         document.getElementById('main').src = src;

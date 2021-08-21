@@ -7,14 +7,16 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
     <title>حدائق جامعة الكفيل</title>
-
-
+    
+     
     <!-- Bootstrap core CSS -->
     <link href="<?php echo URLROOT . "/public/mh/css/bootstrap.rtl.min.css" ?>" rel="stylesheet">
+    <link href="<?php echo URLROOT . "/public/mh/css/bootshape.css" ?>" rel="stylesheet"/>
+
 
     <style>
         .bd-placeholder-img {
-            font-size: 1.125rem;
+            font-size: 1.125rem; 
             text-anchor: middle;
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -26,6 +28,7 @@
                 font-size: 3.5rem;
             }
         }
+
     </style>
 
 
@@ -33,26 +36,7 @@
 <body>
 
 <header class="sticky-top">
-    <div class="collapse bg-dark " id="navbarHeader">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-8 col-md-7 py-4">
-                    <h4 class="text-white">حول</h4>
-                    <p class="text-muted">أضف بعض المعلومات حول الألبوم، المؤلف، أو أي سياق خلفية آخر. اجعلها بضع جمل
-                        حتى يتمكن الزوار من التقاط بعض التلميحات المفيدة. ثم اربطها ببعض مواقع التواصل الاجتماعي أو
-                        معلومات الاتصال.</p>
-                </div>
-                <div class="col-sm-4 offset-md-1 py-4">
-                    <h4 class="text-white">تواصل معي</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-white">تابعني على تويتر</a></li>
-                        <li><a href="#" class="text-white">شاركني الإعجاب في فيسبوك</a></li>
-                        <li><a href="#" class="text-white">راسلني على البريد الإلكتروني</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+ 
     <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container">
             <a target="_blank"
@@ -63,9 +47,48 @@
                         alt="logo "
                 />
             </a>
-            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="تبديل التنقل">
-              <span class="navbar-toggler-icon"></span>
-            </button> -->
+
+
+
+            <div class="text-center mb-1">
+
+<a href="https://www.facebook.com/alkafeel.edu.iq">
+  <img  class="fa" src="<?php echo URLROOT . "/public/images/icon/facebook.svg" ?>" alt="facebook logo"
+/></a>
+
+
+
+
+<a href="https://instagram.com/alkafeeleduiq">
+  <img
+    class="fa"
+    src="<?php echo URLROOT . "/public/images/icon/instagram.svg" ?>"
+    alt="instagram logo"
+  />
+</a>
+
+
+    <a href="https://twitter.com/alkafeeleduiq">
+        <img
+          class="fa"
+          src="<?php echo URLROOT . "/public/images/icon/twitter.svg" ?>"
+          alt="twitter logo"
+        />
+      </a>
+    
+  
+  
+  
+    <a href="https://www.youtube.com/user/humanitiescollege">
+      <img
+        class="fa"
+        src="<?php echo URLROOT . "/public/images/icon/youtube.svg" ?>"
+"
+        alt="youtube logo"
+      />
+    </a>
+              </div>
+      
         </div>
     </div>
 </header>
@@ -74,35 +97,39 @@
 
     <section class="py-5 text-center container ">
         <div class="row py-lg-5">
-            <div class="col-lg-6 col-md-8 mx-auto">
+            <div class=" mx-auto">
                 <h1 class="fw">حدائق جامعة الكفيل</h1>
-                <p class="lead text">
+                <p class="py-4 lead text">
                     بمناسبة بدء العام الدراسيّ الجديد باشرت مجموعة مشاتل الكفيل التابعة لشركة الكفيل للاستثمارات العامّة
                     بشتل 5000 زهرة بمختلف الأنواع والأشكال والألوان في حدائق جامعة الكفيل لتوفير بيئة دراسية تليق بطلبة
                     جامعتنا وتوفّر لهم أفضل الأجواء الدراسيّة.
                 </p>
-                <p>
-                    <a href="https://alkafeel.edu.iq/" class="btn btn-primary my-2">موقع الجامعة الرئيسي</a>
-                </p>
+                
+              
             </div>
         </div>
     </section>
-
+    
     <div class="album py-5 bg-light">
+        
         <div class="container">
-
+            
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 <?php foreach ($data['Plants'] as $plant) :
                     $pId = $plant->pId; ?>
 
-                    <div class="col">
-                        <div class="card shadow-sm ">
+<div class="col">
+    
+    <div class="card shadow-sm ">
+                            <a href="<?php echo URLROOT . "/main/details/" . $pId ?>" >
+
                             <img id="img<?php echo $pId ?>"  src="<?php echo checkImg($plant->mainImg) ?>" class="bd-placeholder-img card-img-top" width="100%" height="225"
-                                 role="img" aria-label="Placeholder: صورة مصغرة" focusable="false"></img>
+                            role="img" aria-label="Placeholder: صورة مصغرة" focusable="false"></img>
+                        </a>
                             <div class="card-body">
                                 <h5 class="card-title text-center"><?php echo $plant->name; ?></h5>
                                 <hr>
-                                <p class="card-text">
+                                <p class="card-text " style='text-align: justify'>
                                     <?php echo $plant->det; ?>
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -120,13 +147,43 @@
         </div>
     </div>
 </main>
+<section class='statisctic '>
+<div >
+    <img class='far py-4' src="<?php echo URLROOT . "/public/images/statistics/agave.svg" ?>" alt="agaver">
+    <h5 class='text-center'> <b> 1200</b></h5> 
+<h5 class='text-center'> <b> عدد النباتات</b></h5> 
+</div>
+<div>
+<img class='far py-4' src="<?php echo URLROOT . "/public/images/statistics/gardening.svg" ?>" alt="gardening">
 
+    <h5 class='text-center'> <b> 1200</b></h5> 
+<h5 class='text-center'> <b> عدد النباتات</b></h5> 
+</div>
+<div>
+<img class='far py-4' src="<?php echo URLROOT . "/public/images/statistics/planet-earth.svg" ?>" alt="planet-earth">
+
+    <h5 class='text-center'> <b> 1200</b></h5> 
+<h5 class='text-center'> <b> عدد النباتات</b></h5> 
+</div>
+<div>
+<img class='far py-4' src="<?php echo URLROOT . "/public/images/statistics/planet-save.svg" ?>" alt="planet-save">
+
+    <h5 class='text-center'> <b> 1200</b></h5> 
+<h5 class='text-center'> <b> عدد النباتات</b></h5> 
+</div>
+
+</section>
 <footer class="text-muted py-5">
-    <div class="container footer">
-        <!-- <p class="float-end mb-1">
-          <a href="#">عد إلى الأعلى</a>
-        </p>
-       -->
+    <div class="container  footer text-center
+    ">
+    <p>
+                    
+                    <a target='_blank' href="https://alkafeel.edu.iq/research" class="btn btn-primary my-2">البحث العلمي</a>
+                    <a target='_blank' href="https://alkafeel.edu.iq/library/" class="btn btn-primary my-2">مكتبة الجامعة</a>
+                    <a target='_blank' href="https://alkafeel.edu.iq/ukfl" class="btn btn-primary my-2">الحياة الجامعية</a>
+                </p>
+                 <p> CopyRight 2021 Alkafeel University &copy;</p>
+      
     </div>
 </footer>
 

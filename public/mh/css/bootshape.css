@@ -1,11 +1,17 @@
+
+@font-face {
+  font-family: Droid Arabic Kufi;
+  src: url(../fonts/DroidArabicKufi.woff);
+}
+*{
+
+  font-family: 'Droid Arabic Kufi', serif;
+}
 body {
     background-image:url('../img/bg.png');
     background-repeat:repeat;
-}
-.navbar {
-    background-image:url('../img/bg.png');
-    background-repeat:repeat;
-}
+} 
+
 .jumbotron {
     background-color: transparent;
     padding: 0 0 0 0;
@@ -26,6 +32,7 @@ body {
 .footer {
     margin-top: 40px;
     padding: 40px 0;
+    
 }
 
 .card{
@@ -79,3 +86,24 @@ body {
     flex-direction: column;
     justify-content: space-around;
   }
+
+
+  /* footor imgs style */
+
+
+  .fa {
+    width: 60px;
+    height: 60px;
+    padding: 12px;
+    text-decoration: none !important;
+    color: #07AAE9;
+  
+   }
+   .statisctic{
+     display: flex;
+     justify-content: space-evenly;
+   }
+.far{
+  height: 150px;
+}
+
