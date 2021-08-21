@@ -121,7 +121,7 @@ $imgs = json_decode($currentPlant->imgs); ?>
                         $i = 0;
                         foreach ($imgs as $img) :?>
                             <li><a data-target="#pic-<?php echo $i ?>" data-toggle="tab"><img
-                                          class='imgcrop'  src=" <?php echo checkImg($img)  ?>"/></a></li>
+                                          class='imgcrop' onclick='change(this.src)'  src=" <?php echo checkImg($img)  ?>"/></a></li>
                         <?php endforeach; ?>
                     </ul>
 
