@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html >
 <head>
     <title>Zoo Planet</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -40,19 +40,60 @@ width: 180px;
 <!-- Navigation bar -->
 <header class="sticky-top">
  
-    </div>
     <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container">
-            <a target="_blank"
-               href="https://alkafeel.edu.iq/" style="padding: 0;" class="navbar-brand d-flex align-items-center">
+            <a 
+               href="<?php echo URLROOT . "/main/index/" ?>" style="padding: 0;" class="navbar-brand d-flex align-items-center">
                 <img
                         style="width: 40%"
                         src="https://alkafeel.edu.iq/tables/public/images/statics/logo.png"
                         alt="logo "
                 />
             </a>
-            <a href="<?php echo URLROOT . "/index.php" ?>" style='color:#01A9E8; font-size:2rem; text-decoration:none'><b> حدائق الجامعة </b></a>
-            
+
+
+
+            <div class="text-center mb-1">
+
+<a href="https://www.facebook.com/alkafeel.edu.iq">
+  <img  class="fa" src="<?php echo URLROOT . "/public/images/icon/facebook.svg" ?>" alt="facebook logo"
+/>
+
+</a>
+
+
+
+
+<a href="https://instagram.com/alkafeeleduiq">
+  <img
+    class="fa"
+    src="<?php echo URLROOT . "/public/images/icon/instagram.svg" ?>"
+    alt="instagram logo"
+  />
+</a>
+
+
+    <a href="https://twitter.com/alkafeeleduiq">
+        <img
+          class="fa"
+          src="<?php echo URLROOT . "/public/images/icon/twitter.svg" ?>"
+          alt="twitter logo"
+        />
+      </a>
+    
+  
+  
+  
+    <a href="https://www.youtube.com/user/humanitiescollege">
+      <img
+        class="fa"
+        src="<?php echo URLROOT . "/public/images/icon/youtube.svg" ?>"
+"
+        alt="youtube logo"
+      />
+    </a>
+              </div>
+      
         </div>
     </div>
 </header>
@@ -86,7 +127,7 @@ $imgs = json_decode($currentPlant->imgs); ?>
                 </div>
                 <div class="details col-md-6">
                     <h3 class="product-title text-center"><?php echo $currentPlant->name; ?> </h3>
-                    <h3 class="product-title text-center"  > <?php echo $currentPlant->eName; ?></h3>
+                    <h3 class="product-title text-center" style='color:#01A9E8' > <?php echo $currentPlant->eName; ?></h3>
 <hr />
 <p style='text-align: right;'
                     <p class="product-description " style='text-align: justify' >
@@ -103,46 +144,18 @@ $imgs = json_decode($currentPlant->imgs); ?>
     </div>
 </div>
 <!-- copyright -->
+
 <footer class="text-muted py-5">
-    <div class="container  footer">
-   
-        <div class="text-center mb-1">
-
-  <a href="https://www.facebook.com/alkafeel.edu.iq">
-    <img  class="fa" src=" <?php echo URLROOT . "/public/images/icon/facebook.svg" ?> " alt="facebook logo"
-  /></a>
-
-
-
-  
-  <a href="https://instagram.com/alkafeeleduiq">
-    <img
-      class="fa"
-      src="<?php echo URLROOT . "/public/images/icon/instagram.svg" ?>"
-      alt="instagram logo"
-    />
-  </a>
-
-
-      <a href="https://twitter.com/alkafeeleduiq">
-          <img
-            class="fa"
-             src="<?php echo URLROOT . "/public/images/icon/twitter.svg" ?>"
-            alt="twitter logo"
-          />
-        </a>
+    <div class="container  footer text-center
+    ">
+    <p>
       
-    
-    
-    
-      <a href="https://www.youtube.com/user/humanitiescollege">
-        <img
-          class="fa"
-          src="<?php echo URLROOT . "/public/images/icon/youtube.svg" ?>"
-          alt="youtube logo"
-        />
-      </a>
-                </div>
+      <a target='_blank' href="https://alkafeel.edu.iq/research" class="btn btn-primary my-2">البحث العلمي</a>
+      <a target='_blank' href="https://alkafeel.edu.iq/library/" class="btn btn-primary my-2">مكتبة الجامعة</a>
+      <a target='_blank' href="https://alkafeel.edu.iq/ukfl" class="btn btn-primary my-2">الحياة الجامعية</a>
+      <a target='_blank' href="https://alkafeel.edu.iq" class="btn btn-info my-2">موقع الجامعة</a>
+                </p>
+                 <p>&copy; CopyRight 2021 Alkafeel University </p>
       
     </div>
 </footer>

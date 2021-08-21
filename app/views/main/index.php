@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html >
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,8 +39,8 @@
  
     <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container">
-            <a target="_blank"
-               href="https://alkafeel.edu.iq/" style="padding: 0;" class="navbar-brand d-flex align-items-center">
+            <a 
+               href="<?php echo URLROOT . "/main/index/" ?>" style="padding: 0;" class="navbar-brand d-flex align-items-center">
                 <img
                         style="width: 40%"
                         src="https://alkafeel.edu.iq/tables/public/images/statics/logo.png"
@@ -94,10 +94,13 @@
 </header>
 
 <main>
+<div class='bg-img'>
+<div style='background: rgba(0, 0, 0, 0.5);'>
 
-    <section class="py-5 text-center container ">
+
+    <section class="py-5 text-center container  ">
         <div class="row py-lg-5">
-            <div class=" mx-auto">
+            <div class=" mx-auto " style='color:#fff'>
                 <h1 class="fw">حدائق جامعة الكفيل</h1>
                 <p class="py-4 lead text">
                     بمناسبة بدء العام الدراسيّ الجديد باشرت مجموعة مشاتل الكفيل التابعة لشركة الكفيل للاستثمارات العامّة
@@ -109,6 +112,7 @@
             </div>
         </div>
     </section>
+</div> </div>
     
     <div class="album py-5 bg-light">
         
@@ -127,7 +131,7 @@
                             role="img" aria-label="Placeholder: صورة مصغرة" focusable="false"></img>
                         </a>
                             <div class="card-body">
-                                <h5 class="card-title text-center"><?php echo $plant->name; ?></h5>
+                                <h5 class="card-title text-center"  style='color:#01A9E8'><?php echo $plant->name; ?></h5>
                                 <hr>
                                 <p class="card-text " style='text-align: justify'>
                                     <?php echo $plant->det; ?>
@@ -148,28 +152,28 @@
     </div>
 </main>
 <section class='statisctic '>
-<div >
+<div class='text-center' >
     <img class='far py-4' src="<?php echo URLROOT . "/public/images/statistics/agave.svg" ?>" alt="agaver">
     <h5 class='text-center'> <b> 1200</b></h5> 
-<h5 class='text-center'> <b> عدد النباتات</b></h5> 
+<h5 > <b> عدد نباتات الزينة</b></h5> 
 </div>
-<div>
+<div class='text-center'>
 <img class='far py-4' src="<?php echo URLROOT . "/public/images/statistics/gardening.svg" ?>" alt="gardening">
 
-    <h5 class='text-center'> <b> 1200</b></h5> 
-<h5 class='text-center'> <b> عدد النباتات</b></h5> 
+    <h5 > <b> 1200</b></h5> 
+<h5 > <b> عدد النباتات الكلي </b></h5> 
 </div>
-<div>
+<div class='text-center'>
 <img class='far py-4' src="<?php echo URLROOT . "/public/images/statistics/planet-earth.svg" ?>" alt="planet-earth">
 
-    <h5 class='text-center'> <b> 1200</b></h5> 
-<h5 class='text-center'> <b> عدد النباتات</b></h5> 
+    <h5 > <b> 1200</b></h5> 
+<h5 class='text-center'> <b> عدد النباتات الطبية</b></h5> 
 </div>
-<div>
+<div class='text-center'>
 <img class='far py-4' src="<?php echo URLROOT . "/public/images/statistics/planet-save.svg" ?>" alt="planet-save">
 
-    <h5 class='text-center'> <b> 1200</b></h5> 
-<h5 class='text-center'> <b> عدد النباتات</b></h5> 
+    <h5 > <b> 1200</b></h5> 
+<h5 class='text-center'> <b> عدد عمليات التشجير</b></h5> 
 </div>
 
 </section>
@@ -178,11 +182,12 @@
     ">
     <p>
                     
-                    <a target='_blank' href="https://alkafeel.edu.iq/research" class="btn btn-primary my-2">البحث العلمي</a>
-                    <a target='_blank' href="https://alkafeel.edu.iq/library/" class="btn btn-primary my-2">مكتبة الجامعة</a>
-                    <a target='_blank' href="https://alkafeel.edu.iq/ukfl" class="btn btn-primary my-2">الحياة الجامعية</a>
+        <a target='_blank' href="https://alkafeel.edu.iq/research" class="btn btn-primary my-2">البحث العلمي</a>
+        <a target='_blank' href="https://alkafeel.edu.iq/library/" class="btn btn-primary my-2">مكتبة الجامعة</a>
+        <a target='_blank' href="https://alkafeel.edu.iq/ukfl" class="btn btn-primary my-2">الحياة الجامعية</a>
+        <a target='_blank' href="https://alkafeel.edu.iq" class="btn btn-info my-2">موقع الجامعة</a>
                 </p>
-                 <p> CopyRight 2021 Alkafeel University &copy;</p>
+                 <p>&copy; CopyRight 2021 Alkafeel University </p>
       
     </div>
 </footer>

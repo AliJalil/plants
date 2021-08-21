@@ -107,3 +107,8 @@ body {
   height: 150px;
 }
 
+.bg-img{
+  background: url('https://alkafeel.edu.iq/library/img/cover.jpg') center no-repeat;
+  background-size: cover;
+  width: 100%;
+}

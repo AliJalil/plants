@@ -26,7 +26,8 @@
   
   .preview-thumbnail.nav-tabs {
     border: none;
-    margin-top: 15px; }
+    margin-top: 15px; 
+    margin-bottom:15px;}
     .preview-thumbnail.nav-tabs li {
       width: 30%;
       margin: 1%; }
