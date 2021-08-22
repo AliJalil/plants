@@ -3,9 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.84.0">
+    <meta name="description" content="AlKafeel University Plantes">
+    <meta name="author" content="Alkafeel University Plantes">
     <title>حدائق جامعة الكفيل</title>
     
      
@@ -100,7 +99,7 @@
     
     <div class='bg-video'>
 
-    <video autoplay muted loop id="myVideo" >
+    <video autoplay muted loop  >
         <source src="<?php echo URLROOT . "/public/images/vid/garden.mp4" ?>" type="video/mp4">
         Your browser does not support HTML5 video.
     </video>
@@ -111,19 +110,18 @@
     
     <div class="text">
 
-        <!-- <section class="py-5 text-center container  ">
-            <div class=" mx-auto " style='color:#fff'> -->
+        
                 <h1 >حدائق جامعة الكفيل</h1>
-                <!-- <p class="py-4 lead text"> -->
-                    <p>
-                    بمناسبة بدء العام الدراسيّ الجديد باشرت مجموعة مشاتل الكفيل التابعة لشركة الكفيل للاستثمارات العامّة
-                    بشتل 5000 زهرة بمختلف الأنواع والأشكال والألوان في حدائق جامعة الكفيل لتوفير بيئة دراسية تليق بطلبة
-                    جامعتنا وتوفّر لهم أفضل الأجواء الدراسيّة.
+                    <p> <b>
+
+                        بمناسبة بدء العام الدراسيّ الجديد باشرت مجموعة مشاتل الكفيل التابعة لشركة الكفيل للاستثمارات العامّة
+                        بشتل 5000 زهرة بمختلف الأنواع والأشكال والألوان في حدائق جامعة الكفيل لتوفير بيئة دراسية تليق بطلبة
+                        جامعتنا وتوفّر لهم أفضل الأجواء الدراسيّة.
+                    </b>
                 </p>
                 
                 
-            <!-- </div>
-        </section> -->
+           
     </div>
 
 
@@ -217,7 +215,7 @@
         <a target='_blank' href="https://alkafeel.edu.iq/ukfl" class="btn btn-primary my-2">الحياة الجامعية</a>
         <a target='_blank' href="https://alkafeel.edu.iq" class="btn btn-info my-2">موقع الجامعة</a>
                 </p>
-                 <p>&copy; CopyRight 2021 Alkafeel University </p>
+                 <p style='color:#000'>&copy; CopyRight 2021 Alkafeel University </p>
       
     </div>
 </footer>

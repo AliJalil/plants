@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html >
 <head>
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="AlKafeel University Plantes">
+    <meta name="author" content="Alkafeel University Plantes">
 <title>حدائق جامعة الكفيل</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -8,24 +12,13 @@
     <link href="<?php echo URLROOT . "/public/mh/css/bootstrap.rtl.min.css" ?>" rel="stylesheet">
 
 
-    <!--Google Fonts-->
-    <link href="http://fonts.googleapis.com/css?family=Duru+Sans|Actor" rel="stylesheet" type="text/css"/>
-
+   
     <!--Bootshape-->
 
     <link href="<?php echo URLROOT . "/public/mh/css/details.css" ?>" rel="stylesheet"/>
     <link href="<?php echo URLROOT . "/public/mh/css/bootshape.css" ?>" rel="stylesheet"/>
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 
     
-    <![endif]-->
-    <script type="text/javascript" src="<?php echo URLROOT . "/public/mh/js/bootstrap.min.js" ?>"></script>
-    <script type="text/javascript" src="<?php echo URLROOT . "/public/mh/js/bootshape.js" ?>"></script>
-    <script type="text/javascript" src="<?php echo URLROOT . "/public/mh/js/jquery.js" ?>"></script>
 </head>
 <style>
 .imgcrop{
@@ -121,7 +114,7 @@ $imgs = json_decode($currentPlant->imgs); ?>
                         $i = 0;
                         foreach ($imgs as $img) :?>
                             <li><a data-target="#pic-<?php echo $i ?>" data-toggle="tab"><img
-                                          class='imgcrop' onclick='change(this.src)'  src=" <?php echo checkImg($img)  ?>"/></a></li>
+                                       width='500px' height='400px'   class='imgcrop' onclick='change(this.src)'  src=" <?php echo checkImg($img)  ?>"/></a></li>
                         <?php endforeach; ?>
                     </ul>
 
@@ -156,7 +149,7 @@ $imgs = json_decode($currentPlant->imgs); ?>
       <a target='_blank' href="https://alkafeel.edu.iq/ukfl" class="btn btn-primary my-2">الحياة الجامعية</a>
       <a target='_blank' href="https://alkafeel.edu.iq" class="btn btn-info my-2">موقع الجامعة</a>
                 </p>
-                 <p>&copy; CopyRight 2021 Alkafeel University </p>
+                 <p style='color:#000'>&copy; CopyRight 2021 Alkafeel University </p>
       
     </div>
 </footer>
