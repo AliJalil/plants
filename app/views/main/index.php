@@ -94,44 +94,66 @@
 </header>
 
 <main>
-<div class='bg-img'>
-<div style='background: rgba(0, 0, 0, 0.35);'>
+<!-- <div style='background: rgba(0, 0, 0, 0.35);' > -->
 
+    
+    
+    <div class='bg-video'>
 
-    <section class="py-5 text-center container  ">
-        <div class="row py-lg-5">
-            <div class=" mx-auto " style='color:#fff'>
-                <h1 class="fw">حدائق جامعة الكفيل</h1>
-                <p class="py-4 lead text">
+    <video autoplay muted loop id="myVideo" >
+        <source src="<?php echo URLROOT . "/public/images/vid/garden.mp4" ?>" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+    
+    
+    
+    
+    
+    <div class="text">
+
+        <!-- <section class="py-5 text-center container  ">
+            <div class=" mx-auto " style='color:#fff'> -->
+                <h1 >حدائق جامعة الكفيل</h1>
+                <!-- <p class="py-4 lead text"> -->
+                    <p>
                     بمناسبة بدء العام الدراسيّ الجديد باشرت مجموعة مشاتل الكفيل التابعة لشركة الكفيل للاستثمارات العامّة
                     بشتل 5000 زهرة بمختلف الأنواع والأشكال والألوان في حدائق جامعة الكفيل لتوفير بيئة دراسية تليق بطلبة
                     جامعتنا وتوفّر لهم أفضل الأجواء الدراسيّة.
                 </p>
                 
-              
-            </div>
-        </div>
-    </section>
-</div> </div>
+                
+            <!-- </div>
+        </section> -->
+    </div>
 
+
+    
+</div> 
     
     <div class="album py-5 bg-light">
         
         <div class="container">
             
+
+
+
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 <?php foreach ($data['Plants'] as $plant) :
                     $pId = $plant->pId; ?>
 
-<div class="col">
+<div class="col  ">
+
     
     <div class="card shadow-sm ">
-                            <a href="<?php echo URLROOT . "/main/details/" . $pId ?>" >
 
-                            <img id="img<?php echo $pId ?>"  src="<?php echo checkImg($plant->mainImg) ?>" class="bd-placeholder-img card-img-top" width="100%" height="225"
+                            <a href="<?php echo URLROOT . "/main/details/" . $pId ?>" >
+                            
+                            <img id="img<?php echo $pId ?>"  src="<?php echo checkImg($plant->mainImg) ?>" class="zoom bd-placeholder-img card-img-top" width="100%" height="225"
                             role="img" aria-label="Placeholder: صورة مصغرة" focusable="false"></img>
                         </a>
-                            <div class="card-body">
+                        
+                        
+                        <div class="card-body">
                                 <h5 class="card-title text-center"  style='color:#01A9E8'><?php echo $plant->name; ?></h5>
                                 <hr>
                                 <div class='overflowed'>
@@ -147,13 +169,17 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+</div>
+</div>
+                     
 
                 <?php endforeach; ?>
             </div>
         </div>
+    
+    
     </div>
+    
 </main>
 <section class='statisctic '>
 <div class='text-center' >
