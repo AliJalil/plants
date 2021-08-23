@@ -39,13 +39,13 @@
     <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container">
             <a 
-               href="<?php echo URLROOT . "/main/index/" ?>" style="padding: 0;" class="navbar-brand d-flex align-items-center">
-                <img
-                        style="width: 40%"
-                        src="https://alkafeel.edu.iq/tables/public/images/statics/logo.png"
-                        alt="logo "
-                />
-            </a>
+            href="<?php echo URLROOT . "/main/index/" ?>" style="padding: 0;" class="navbar-brand d-flex align-items-center">
+            <img
+            style="width: 40%"
+            src="https://alkafeel.edu.iq/tables/public/images/statics/logo.png"
+            alt="logo "
+            />
+        </a>
 
 
 
@@ -53,7 +53,8 @@
 
 <a href="https://www.facebook.com/alkafeel.edu.iq">
   <img  class="fa" src="<?php echo URLROOT . "/public/images/icon/facebook.svg" ?>" alt="facebook logo"
-/></a>
+/>
+</a>
 
 
 

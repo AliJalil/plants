@@ -104,6 +104,7 @@ $imgs = json_decode($currentPlant->imgs); ?>
                         <div class="tab-pane active" id="pic-1"><img  id="main"
                                 style='
     border-radius: 4%;
+    height:20rem;
                                 
                                 '    src="<?php echo  checkImg($currentPlant->mainImg)  ?>"/></div>
 
