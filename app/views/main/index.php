@@ -112,12 +112,14 @@
     <div class="text">
 
         
-                <h1 >حدائق جامعة الكفيل</h1>
+                <h1><b> حدائق جامعة الكفيل  </b></h1>
                     <p> <b>
 
                         بمناسبة بدء العام الدراسيّ الجديد باشرت مجموعة مشاتل الكفيل التابعة لشركة الكفيل للاستثمارات العامّة
-                        بشتل 5000 زهرة بمختلف الأنواع والأشكال والألوان في حدائق جامعة الكفيل لتوفير بيئة دراسية تليق بطلبة
-                        جامعتنا وتوفّر لهم أفضل الأجواء الدراسيّة.
+                        بشتل 5000 زهرة 
+                        <br>
+                        بمختلف الأنواع والأشكال والألوان في حدائق جامعة الكفيل لتوفير بيئة دراسية تليق بطلبة
+                        جامعتنا وتوفّر لهم أفضل الأجواء الدراسيّة
                     </b>
                 </p>
                 
@@ -128,6 +130,48 @@
 
     
 </div> 
+<!--  -->
+<section class='statisctic '>
+<div class='text-center' >
+    <img class='far py-4' src="<?php echo URLROOT . "/public/images/statistics/agave.svg" ?>" alt="agaver">
+    <h5 class='text-center'> <b> 1200</b></h5> 
+<h5 > <b> عدد نباتات الزينة</b></h5> 
+</div>
+<div class='text-center'>
+<img class='far py-4' src="<?php echo URLROOT . "/public/images/statistics/gardening.svg" ?>" alt="gardening">
+
+    <h5 > <b> 1200</b></h5> 
+<h5 > <b> عدد النباتات الكلي </b></h5> 
+</div>
+<div class='text-center'>
+<img class='far py-4' src="<?php echo URLROOT . "/public/images/statistics/planet-earth.svg" ?>" alt="planet-earth">
+
+    <h5 > <b> 1200</b></h5> 
+<h5 class='text-center'> <b> عدد النباتات الطبية</b></h5> 
+</div>
+<div class='text-center'>
+<img class='far py-4' src="<?php echo URLROOT . "/public/images/statistics/planet-save.svg" ?>" alt="planet-save">
+
+    <h5 > <b> 1200</b></h5> 
+<h5 class='text-center'> <b> عدد عمليات التشجير</b></h5> 
+</div>
+
+</section>
+<!--  -->
+
+<!-- news bar  -->
+
+<div class="hwrap"><div class="hmove">
+    <!-- IMPORTANT NOTE  -->
+    <!-- The links must be four and four only -->
+    <a href='https://alkafeel.edu.iq/news/details/398' target='_blank' class="hitem">خصومات حصرية لمنتسبي الجامعة فقط ... تفضلوا بزيارة مشتل جامعة الكفيل لشراء نباتكم المفضل</a>
+    <a href='https://alkafeel.edu.iq/news/details/398' target='_blank' class="hitem">تم افتتاح معرض لنباتات الزينة ... تفضلوا بزيارة مشتل جامعة الكفيل</a>
+    <a href='https://alkafeel.edu.iq/news/details/398' target='_blank' class="hitem">خصومات حصرية لمنتسبي الجامعة فقط ... تفضلوا بزيارة مشتل جامعة الكفيل لشراء نباتكم المفضل</a>
+    <a href='https://alkafeel.edu.iq/news/details/398' target='_blank' class="hitem">تم افتتاح معرض لنباتات الزينة ... تفضلوا بزيارة مشتل جامعة الكفيل</a>
+
+ 
+</div></div>
+<!--  -->
     
     <div class="album py-5 bg-light">
         
@@ -180,32 +224,7 @@
     </div>
     
 </main>
-<section class='statisctic '>
-<div class='text-center' >
-    <img class='far py-4' src="<?php echo URLROOT . "/public/images/statistics/agave.svg" ?>" alt="agaver">
-    <h5 class='text-center'> <b> 1200</b></h5> 
-<h5 > <b> عدد نباتات الزينة</b></h5> 
-</div>
-<div class='text-center'>
-<img class='far py-4' src="<?php echo URLROOT . "/public/images/statistics/gardening.svg" ?>" alt="gardening">
 
-    <h5 > <b> 1200</b></h5> 
-<h5 > <b> عدد النباتات الكلي </b></h5> 
-</div>
-<div class='text-center'>
-<img class='far py-4' src="<?php echo URLROOT . "/public/images/statistics/planet-earth.svg" ?>" alt="planet-earth">
-
-    <h5 > <b> 1200</b></h5> 
-<h5 class='text-center'> <b> عدد النباتات الطبية</b></h5> 
-</div>
-<div class='text-center'>
-<img class='far py-4' src="<?php echo URLROOT . "/public/images/statistics/planet-save.svg" ?>" alt="planet-save">
-
-    <h5 > <b> 1200</b></h5> 
-<h5 class='text-center'> <b> عدد عمليات التشجير</b></h5> 
-</div>
-
-</section>
 <footer class="text-muted py-5">
     <div class="container  footer text-center
     ">
